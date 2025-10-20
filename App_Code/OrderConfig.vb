@@ -1228,7 +1228,7 @@ Public Class OrderConfig
                 If designName = "Vertical" And blindName = "Blades Only" Then widthExecute = qtyBlade
                 If designName = "Additional" Then widthExecute = 0 : dropExecute = 0
                 If designName = "Curtain" Then dropExecute = 0
-                If designName = "Evolve Shutters" Or designName = "Panorama PVC Shutters" Or designName = "Panorama PVC Parts" Then widthExecute = 0 : dropExecute = 0
+                If designName = "Evolve Parts" Or designName = "Evolve Parts" Or designName = "Evolve Shutters" Or designName = "Panorama PVC Shutters" Or designName = "Panorama PVC Parts" Then widthExecute = 0 : dropExecute = 0
 
                 Dim descriptionPrice As String = String.Empty
 
@@ -1316,6 +1316,10 @@ Public Class OrderConfig
                     If designName = "Evolve Shutters" Then
                         Dim sqm As Decimal = Math.Round(width * drop / 1000000, 4)
                         thisGridMatrix = gridMatrix * sqm
+                    End If
+
+                    If designName = "Evolve Parts" Then
+                        thisGridMatrix = 0.00
                     End If
 
                     If designName = "Panorama PVC Shutters" Then
@@ -2444,6 +2448,7 @@ Public Class OrderConfig
             Using myCmd As SqlCommand = New SqlCommand("UPDATE OrderDetails SET Cost=@Cost WHERE Id=@ItemId")
                 myCmd.Parameters.AddWithValue("@ItemId", ItemId)
                 myCmd.Parameters.AddWithValue("@Cost", Cost)
+                ' myCmd.Parameters.AddWithValue("@Cost", 0.00)
                 myCmd.Connection = thisConn
                 thisConn.Open()
                 myCmd.ExecuteNonQuery()
@@ -2457,6 +2462,7 @@ Public Class OrderConfig
             Using myCmd As SqlCommand = New SqlCommand("UPDATE OrderDetails SET CostOverride=@Cost WHERE Id=@ItemId")
                 myCmd.Parameters.AddWithValue("@ItemId", ItemId)
                 myCmd.Parameters.AddWithValue("@Cost", Cost)
+                ' myCmd.Parameters.AddWithValue("@Cost", 0.00)
                 myCmd.Connection = thisConn
                 thisConn.Open()
                 myCmd.ExecuteNonQuery()

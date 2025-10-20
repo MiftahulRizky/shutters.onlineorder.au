@@ -1,25 +1,19 @@
 ﻿$("#divOrder").hide();
 
-document
-    .getElementById("modalSuccess")
-    .addEventListener("hide.bs.modal", function () {
-        document.activeElement.blur();
-        document.body.focus();
-    });
+document.getElementById("modalSuccess").addEventListener("hide.bs.modal", function () {
+    document.activeElement.blur();
+    document.body.focus();
+});
 
-document
-    .getElementById("modalError")
-    .addEventListener("hide.bs.modal", function () {
-        document.activeElement.blur();
-        document.body.focus();
-    });
+document.getElementById("modalError").addEventListener("hide.bs.modal", function () {
+    document.activeElement.blur();
+    document.body.focus();
+});
 
-document
-    .getElementById("modalInfo")
-    .addEventListener("hide.bs.modal", function () {
-        document.activeElement.blur();
-        document.body.focus();
-    });
+document.getElementById("modalInfo").addEventListener("hide.bs.modal", function () {
+    document.activeElement.blur();
+    document.body.focus();
+});
 
 $(document).ready(function () {
     checkSession();
@@ -36,8 +30,7 @@ $(document).ready(function () {
         const louvreposition = document.getElementById("louvreposition").value;
         const louvresize = document.getElementById("louvresize").value;
         const framebottom = document.getElementById("framebottom").value;
-        const midrailheight1 =
-            parseFloat(document.getElementById("midrailheight1").value) || 0;
+        const midrailheight1 = parseFloat(document.getElementById("midrailheight1").value) || 0;
 
         bindColourType(blindtype);
         bindMounting(blindtype);
@@ -69,28 +62,27 @@ $(document).ready(function () {
         const louvresize = $(this).val();
         const louvreposition = document.getElementById("louvreposition").value;
 
-        getBlindName(blindtype)
-            .then((blindName) => {
-                if (blindName === "Panel Only") {
-                    const dropInput = document.getElementById("drop").value;
-                    const drop = parseFloat(dropInput) || 0;
+        getBlindName(blindtype).then((blindName) => {
+            if (blindName === "Panel Only") {
+                const dropInput = document.getElementById("drop").value;
+                const drop = parseFloat(dropInput) || 0;
 
-                    if (dropInput.length < 4) return;
-                    if (drop.length < 4) return;
-                    if (louvresize === "63" && drop < 282) {
-                        isError("MINIMUM PANEL HEIGHT IS 282MM !");
-                    } else if (louvresize === "89" && drop < 333) {
-                        isError("MINIMUM PANEL HEIGHT IS 333MM !");
-                    } else if (louvresize === "114" && drop < 384) {
-                        isError("MINIMUM PANEL HEIGHT IS 384MM !");
-                    } else if (drop > 2500) {
-                        isError("MAXIMUM PANEL HEIGHT IS 2500MM !");
-                    }
+                if (dropInput.length < 4) return;
+                if (drop.length < 4) return;
+
+                if (louvresize === "63" && drop < 282) {
+                    isError("MINIMUM PANEL HEIGHT IS 282MM !");
+                } else if (louvresize === "89" && drop < 333) {
+                    isError("MINIMUM PANEL HEIGHT IS 333MM !");
+                } else if (louvresize === "114" && drop < 384) {
+                    isError("MINIMUM PANEL HEIGHT IS 384MM !");
+                } else if (drop > 2500) {
+                    isError("MAXIMUM PANEL HEIGHT IS 2500MM !");
                 }
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-            });
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
 
         bindFrameType(blindtype, mounting, louvresize, louvreposition);
     });
@@ -208,51 +200,47 @@ $(document).ready(function () {
     $("#width").on("input", function () {
         const blindtype = document.getElementById("blindtype").value;
 
-        getBlindName(blindtype)
-            .then((blindName) => {
-                if (blindName !== "Panel Only") return;
-                const widthInput = $(this).val();
-                const width = parseFloat(widthInput) || 0;
+        getBlindName(blindtype).then((blindName) => {
+            if (blindName !== "Panel Only") return;
+            const widthInput = $(this).val();
+            const width = parseFloat(widthInput) || 0;
 
-                if (widthInput.length < 3) return;
-                if (width < 200 || width > 900) {
-                    isError("PANEL WIDTH MUST BE BETWEEN 200MM & 900MM !");
-                    $(this).val("");
-                }
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-            });
+            if (widthInput.length < 3) return;
+            if (width < 200 || width > 900) {
+                isError("PANEL WIDTH MUST BE BETWEEN 200MM & 900MM !");
+                $(this).val("");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     });
 
     $("#drop").on("input", function () {
         const blindtype = document.getElementById("blindtype").value;
 
-        getBlindName(blindtype)
-            .then((blindName) => {
-                if (blindName === "Panel Only") {
-                    const drop = parseFloat($(this).val()) || 0;
-                    const louvresize = document.getElementById("louvresize").value;
+        getBlindName(blindtype).then((blindName) => {
+            if (blindName === "Panel Only") {
+                const drop = parseFloat($(this).val()) || 0;
+                const louvresize = document.getElementById("louvresize").value;
 
-                    if ($(this).val().length < 4) return;
-                    if (louvresize === "63" && drop < 282) {
-                        isError("MINIMUM PANEL HEIGHT IS 282MM !");
-                        $(this).val("");
-                    } else if (louvresize === "89" && drop < 333) {
-                        isError("MINIMUM PANEL HEIGHT IS 333MM !");
-                        $(this).val("");
-                    } else if (louvresize === "114" && drop < 384) {
-                        isError("MINIMUM PANEL HEIGHT IS 384MM !");
-                        $(this).val("");
-                    } else if (drop > 2500) {
-                        isError("MAXIMUM PANEL HEIGHT IS 2500MM !");
-                        $(this).val("");
-                    }
+                if ($(this).val().length < 4) return;
+                if (louvresize === "63" && drop < 282) {
+                    isError("MINIMUM PANEL HEIGHT IS 282MM !");
+                    $(this).val("");
+                } else if (louvresize === "89" && drop < 333) {
+                    isError("MINIMUM PANEL HEIGHT IS 333MM !");
+                    $(this).val("");
+                } else if (louvresize === "114" && drop < 384) {
+                    isError("MINIMUM PANEL HEIGHT IS 384MM !");
+                    $(this).val("");
+                } else if (drop > 2500) {
+                    isError("MAXIMUM PANEL HEIGHT IS 2500MM !");
+                    $(this).val("");
                 }
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-            });
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     });
 
     $("#notes").on("input", function () {
@@ -295,7 +283,7 @@ async function checkSession() {
             );
         }
     } catch (error) {
-        console.error("Terjadi kesalahan saat proses checkSession:", error);
+        console.error(error);
     }
 }
 
@@ -332,11 +320,11 @@ function getDesignName(designId) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                const designName = response.d.trim() || "Nama desain tidak ditemukan";
+                const designName = response.d.trim();
                 pageTitle.textContent = designName;
                 resolve();
             },
-            error: function (xhr, status, error) {
+            error: function (error) {
                 reject(error);
             },
         });
@@ -362,8 +350,7 @@ function getDataHeader(headerId) {
                 }
                 resolve();
             },
-            error: function (xhr, status, error) {
-                console.error("AJAX Error:", error);
+            error: function (error) {
                 reject(error);
             },
         });
@@ -374,7 +361,6 @@ function getFormAction(itemAction) {
     return new Promise((resolve) => {
         const cardTitle = document.getElementById("cardTitle");
         if (!cardTitle) {
-            console.warn("Elemen 'cardTitle' tidak ditemukan.");
             resolve();
             return;
         }
@@ -404,8 +390,7 @@ function getBlindName(blindId) {
             success: function (response) {
                 resolve(response.d);
             },
-            error: function (xhr, status, error) {
-                console.error("Error:", error);
+            error: function (error) {
                 reject(error);
             },
         });
@@ -456,13 +441,11 @@ function bindBlindType(designId) {
                     Promise.all([
                         bindColourType(selectedValue),
                         bindMounting(selectedValue),
-                    ])
-                        .then(resolve)
-                        .catch(reject);
+                    ]).then(resolve).catch(reject);
                 }
                 resolve();
             },
-            error: function (xhr, status, error) {
+            error: function (error) {
                 reject(error);
             },
         });
@@ -516,13 +499,11 @@ function bindColourType(blindType) {
                         selectedValue = colourtype.value;
                     }
 
-                    Promise.resolve(bindComponentForm(blindType, selectedValue))
-                        .then(resolve)
-                        .catch(reject);
+                    Promise.resolve(bindComponentForm(blindType, selectedValue)).then(resolve).catch(reject);
                 }
                 resolve();
             },
-            error: function (xhr, status, error) {
+            error: function (error) {
                 reject(error);
             },
         });
@@ -570,7 +551,7 @@ function bindMounting(blindId) {
                 }
                 resolve();
             },
-            error: function (xhr, status, error) {
+            error: function (error) {
                 reject(error);
             },
         });
@@ -626,105 +607,103 @@ function bindLayoutCode(blindType) {
             return;
         }
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                let options = [{ value: "", text: "" }];
+        getBlindName(blindType).then((blindName) => {
+            let options = [{ value: "", text: "" }];
 
-                switch (blindName) {
-                    case "Hinged":
-                        options = [
-                            { value: "", text: "" },
-                            { value: "L", text: "L" },
-                            { value: "R", text: "R" },
-                            { value: "LR", text: "LR" },
-                            { value: "LD-R", text: "LD-R" },
-                            { value: "L-DR", text: "L-DR" },
-                            { value: "LTLR", text: "LTLR" },
-                            { value: "LRTR", text: "LRTR" },
-                            { value: "LRTLR", text: "LRTLR" },
-                            { value: "LTLRTR", text: "LTLRTR" },
-                            { value: "LD-RTLD-R", text: "LD-RTLD-R" },
-                            { value: "L-DRTL-DR", text: "L-DRTL-DR" },
-                            { value: "Other", text: "OTHER" },
-                        ];
-                        break;
-                    case "Hinged Bi-fold":
-                        options = [
-                            { value: "", text: "" },
-                            { value: "LL", text: "LL" },
-                            { value: "RR", text: "RR" },
-                            { value: "LLRR", text: "LLRR" },
-                            { value: "Other", text: "OTHER" },
-                        ];
-                        break;
-                    case "Track Bi-fold":
-                        options = [
-                            { value: "", text: "" },
-                            { value: "LL", text: "LL" },
-                            { value: "RR", text: "RR" },
-                            { value: "LLRR", text: "LLRR" },
-                            { value: "LLLL", text: "LLLL" },
-                            { value: "RRRR", text: "RRRR" },
-                            { value: "LLRRRR", text: "LLRRRR" },
-                            { value: "LLLLRR", text: "LLLLRR" },
-                            { value: "LLLLLL", text: "LLLLLL" },
-                            { value: "RRRRRR", text: "RRRRRR" },
-                            { value: "LLRRRRRR", text: "LLRRRRRR" },
-                            { value: "LLLLRRRR", text: "LLLLRRRR" },
-                            { value: "LLLLLLRR", text: "LLLLLLRR" },
-                            { value: "LLLLLLLL", text: "LLLLLLLL" },
-                            { value: "RRRRRRRR", text: "RRRRRRRR" },
-                            { value: "Other", text: "OTHER" },
-                        ];
-                        break;
-                    case "Track Sliding":
-                        options = [
-                            { value: "", text: "" },
-                            { value: "BF", text: "BF" },
-                            { value: "FB", text: "FB" },
-                            { value: "BFB", text: "BFB" },
-                            { value: "FBF", text: "FBF" },
-                            { value: "BFFB", text: "BFFB" },
-                            { value: "FBBF", text: "FBBF" },
-                            { value: "BBFF", text: "BBFF" },
-                            { value: "FFBB", text: "FFBB" },
-                            { value: "Other", text: "OTHER" },
-                        ];
-                        break;
-                    case "Track Sliding Single Track":
-                        options = [
-                            { value: "", text: "" },
-                            { value: "F", text: "F" },
-                            { value: "FF", text: "FF" },
-                            { value: "FFF", text: "FFF" },
-                            { value: "FFFF", text: "FFFF" },
-                            { value: "Other", text: "OTHER" },
-                        ];
-                        break;
-                    case "Fixed":
-                        options = [
-                            { value: "", text: "" },
-                            { value: "F", text: "F" },
-                            { value: "FF", text: "FF" },
-                            { value: "FFF", text: "FFF" },
-                            { value: "FFFF", text: "FFFF" },
-                            { value: "FFFFFF", text: "FFFFFF" },
-                            { value: "Other", text: "OTHER" },
-                        ];
-                        break;
-                }
+            switch (blindName) {
+                case "Hinged":
+                    options = [
+                        { value: "", text: "" },
+                        { value: "L", text: "L" },
+                        { value: "R", text: "R" },
+                        { value: "LR", text: "LR" },
+                        { value: "LD-R", text: "LD-R" },
+                        { value: "L-DR", text: "L-DR" },
+                        { value: "LTLR", text: "LTLR" },
+                        { value: "LRTR", text: "LRTR" },
+                        { value: "LRTLR", text: "LRTLR" },
+                        { value: "LTLRTR", text: "LTLRTR" },
+                        { value: "LD-RTLD-R", text: "LD-RTLD-R" },
+                        { value: "L-DRTL-DR", text: "L-DRTL-DR" },
+                        { value: "Other", text: "OTHER" }
+                    ];
+                    break;
+                case "Hinged Bi-fold":
+                    options = [
+                        { value: "", text: "" },
+                        { value: "LL", text: "LL" },
+                        { value: "RR", text: "RR" },
+                        { value: "LLRR", text: "LLRR" },
+                        { value: "Other", text: "OTHER" }
+                    ];
+                    break;
+                case "Track Bi-fold":
+                    options = [
+                        { value: "", text: "" },
+                        { value: "LL", text: "LL" },
+                        { value: "RR", text: "RR" },
+                        { value: "LLRR", text: "LLRR" },
+                        { value: "LLLL", text: "LLLL" },
+                        { value: "RRRR", text: "RRRR" },
+                        { value: "LLRRRR", text: "LLRRRR" },
+                        { value: "LLLLRR", text: "LLLLRR" },
+                        { value: "LLLLLL", text: "LLLLLL" },
+                        { value: "RRRRRR", text: "RRRRRR" },
+                        { value: "LLRRRRRR", text: "LLRRRRRR" },
+                        { value: "LLLLRRRR", text: "LLLLRRRR" },
+                        { value: "LLLLLLRR", text: "LLLLLLRR" },
+                        { value: "LLLLLLLL", text: "LLLLLLLL" },
+                        { value: "RRRRRRRR", text: "RRRRRRRR" },
+                        { value: "Other", text: "OTHER" }
+                    ];
+                    break;
+                case "Track Sliding":
+                    options = [
+                        { value: "", text: "" },
+                        { value: "BF", text: "BF" },
+                        { value: "FB", text: "FB" },
+                        { value: "BFB", text: "BFB" },
+                        { value: "FBF", text: "FBF" },
+                        { value: "BFFB", text: "BFFB" },
+                        { value: "FBBF", text: "FBBF" },
+                        { value: "BBFF", text: "BBFF" },
+                        { value: "FFBB", text: "FFBB" },
+                        { value: "Other", text: "OTHER" }
+                    ];
+                    break;
+                case "Track Sliding Single Track":
+                    options = [
+                        { value: "", text: "" },
+                        { value: "F", text: "F" },
+                        { value: "FF", text: "FF" },
+                        { value: "FFF", text: "FFF" },
+                        { value: "FFFF", text: "FFFF" },
+                        { value: "Other", text: "OTHER" }
+                    ];
+                    break;
+                case "Fixed":
+                    options = [
+                        { value: "", text: "" },
+                        { value: "F", text: "F" },
+                        { value: "FF", text: "FF" },
+                        { value: "FFF", text: "FFF" },
+                        { value: "FFFF", text: "FFFF" },
+                        { value: "FFFFFF", text: "FFFFFF" },
+                        { value: "Other", text: "OTHER" }
+                    ];
+                    break;
+            }
 
-                options.forEach((opt) => {
-                    let optionElement = document.createElement("option");
-                    optionElement.value = opt.value;
-                    optionElement.textContent = opt.text;
-                    layoutcode.appendChild(optionElement);
-                });
-
-                resolve();
-            }).catch((error) => {
-                reject(error);
+            options.forEach((opt) => {
+                let optionElement = document.createElement("option");
+                optionElement.value = opt.value;
+                optionElement.textContent = opt.text;
+                layoutcode.appendChild(optionElement);
             });
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -831,7 +810,7 @@ function bindFrameType(blindType, mounting, louvreSize, louvrePosition) {
 }
 
 function bindLeftFrame(frameType) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         const frameleft = document.getElementById("frameleft");
         frameleft.innerHTML = "";
 
@@ -1044,7 +1023,7 @@ function bindTopFrame(frameType) {
                 { value: "L Striker Plate", text: "L STRIKER PLATE" },
             ];
         } else if (frameType === "100mm" || frameType === "160mm" || frameType === "200mm") {
-            options = [{ value: "Yes", text: "YES" }, { value: "No", text: "NO" },];
+            options = [{ value: "", text: "" }, { value: "Yes", text: "YES" }, { value: "No", text: "NO" },];
         } else if (frameType === "U Channel") {
             options = [{ value: "Yes", text: "YES" }];
         } else if (frameType === "19x19 Light Block") {
@@ -1162,42 +1141,35 @@ function bindBottomTrack(blindType, bottomFrame) {
             return;
         }
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                let options = [{ value: "", text: "" }];
+        getBlindName(blindType).then((blindName) => {
+            let options = [{ value: "", text: "" }];
 
-                if (
-                    blindName === "Track Bi-fold" ||
-                    blindName === "Track Sliding" ||
-                    blindName === "Track Sliding Single Track"
-                ) {
-                    options = [
-                        { value: "", text: "" },
-                        { value: "M Track", text: "M TRACK" },
-                        { value: "U Track", text: "U TRACK" },
-                    ];
-                    if (bottomFrame === "Yes") {
-                        options = [{ value: "U Track", text: "U TRACK" }];
-                    }
+            if (blindName === "Track Bi-fold" || blindName === "Track Sliding" || blindName === "Track Sliding Single Track") {
+                options = [
+                    { value: "", text: "" },
+                    { value: "M Track", text: "M TRACK" },
+                    { value: "U Track", text: "U TRACK" }
+                ];
+                if (bottomFrame === "Yes") {
+                    options = [{ value: "U Track", text: "U TRACK" }];
                 }
+            }
 
-                options.forEach((opt) => {
-                    let optionElement = document.createElement("option");
-                    optionElement.value = opt.value;
-                    optionElement.textContent = opt.text;
-                    bottomtracktype.appendChild(optionElement);
-                });
-
-                if (bottomtracktype.options.length === 0) {
-                    bottomtracktype.selectedIndex = 0;
-                    visibleBottomTrackReccess(bottomtracktype.value);
-                }
-
-                resolve();
-            })
-            .catch((error) => {
-                reject("Failed to get blind name: " + error);
+            options.forEach((opt) => {
+                let optionElement = document.createElement("option");
+                optionElement.value = opt.value;
+                optionElement.textContent = opt.text;
+                bottomtracktype.appendChild(optionElement);
             });
+
+            if (bottomtracktype.options.length === 0) {
+                bottomtracktype.selectedIndex = 0;
+                visibleBottomTrackReccess(bottomtracktype.value);
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -1221,18 +1193,9 @@ function bindTiltrodSplit(height1) {
             options = [
                 { value: "", text: "" },
                 { value: "None", text: "NONE" },
-                {
-                    value: "Split Halfway Above Midrail",
-                    text: "SPLIT HALFWAY ABOVE MIDRAIL",
-                },
-                {
-                    value: "Split Halfway Below Midrail",
-                    text: "SPLIT HALFWAY BELOW MIDRAIL",
-                },
-                {
-                    value: "Split Halfway Above and Below Midrail",
-                    text: "SPLIT HALFWAY ABOVE & BELOW MIDRAIL",
-                },
+                { value: "Split Halfway Above Midrail", text: "SPLIT HALFWAY ABOVE MIDRAIL" },
+                { value: "Split Halfway Below Midrail", text: "SPLIT HALFWAY BELOW MIDRAIL" },
+                { value: "Split Halfway Above and Below Midrail", text: "SPLIT HALFWAY ABOVE & BELOW MIDRAIL" },
                 { value: "Other", text: "OTHER" },
             ];
         }
@@ -1328,72 +1291,65 @@ function bindComponentForm(blindType, colourType) {
         divSpecialShape.style.display = "none";
         divTemplateProvided.style.display = "none";
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (blindName === "Panel Only") {
-                    divPanelQty.style.display = "";
-                    divTiltrodType.style.display = "";
-                    divTiltrodSplit.style.display = "";
-                } else if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
-                    divHingeColour.style.display = "";
-                    divTiltrodType.style.display = "";
-                    divTiltrodSplit.style.display = "";
-                    divCutOut.style.display = "";
-                    divSpecialShape.style.display = "";
-                    divLayoutCode.style.display = "";
-                    divFrameType.style.display = "";
-                    divHorizontalTPost.style.display = "";
-                } else if (blindName === "Track Bi-fold") {
-                    divHingeColour.style.display = "";
-                    divTiltrodType.style.display = "";
-                    divTiltrodSplit.style.display = "";
-                    divLayoutCode.style.display = "";
-                    divFrameType.style.display = "";
-                    divGapPost.style.display = "";
-                    divBottomTrackType.style.display = "";
-                    divReverseHinged.style.display = "";
-                    divPelmetFlat.style.display = "";
-                    divExtraFascia.style.display = "";
-                } else if (blindName === "Track Sliding") {
-                    divLouvrePosition.style.display = "";
-                    divJoinedPanels.style.display = "";
-                    divCustomHeaderLength.style.display = "";
-                    divLayoutCode.style.display = "";
-                    divFrameType.style.display = "";
-                    divFrameLeft.style.display = "";
-                    divFrameRight.style.display = "";
-                    divFrameTop.style.display = "";
-                    divFrameBottom.style.display = "";
-                    divBottomTrackType.style.display = "";
-                    divTiltrodType.style.display = "";
-                    divTiltrodSplit.style.display = "";
-                    divPelmetFlat.style.display = "";
-                    divExtraFascia.style.display = "";
-                } else if (blindName === "Track Sliding Single Track") {
-                    divJoinedPanels.style.display = "";
-                    divCustomHeaderLength.style.display = "";
-                    divLayoutCode.style.display = "";
-                    divFrameType.style.display = "";
-                    divFrameLeft.style.display = "";
-                    divFrameRight.style.display = "";
-                    divFrameTop.style.display = "";
-                    divFrameBottom.style.display = "";
-                    divBottomTrackType.style.display = "";
-                    divTiltrodType.style.display = "";
-                    divTiltrodSplit.style.display = "";
-                    divPelmetFlat.style.display = "";
-                    divExtraFascia.style.display = "";
-                } else if (blindName === "Fixed") {
-                    divLayoutCode.style.display = "";
-                    divFrameType.style.display = "";
-                    divTiltrodType.style.display = "";
-                    divTiltrodSplit.style.display = "";
-                    divSpecialShape.style.display = "";
-                }
-            })
-            .catch((error) => {
-                reject(error);
-            });
+        getBlindName(blindType).then((blindName) => {
+            if (blindName === "Panel Only") {
+                divPanelQty.style.display = "";
+                divTiltrodType.style.display = "";
+                divTiltrodSplit.style.display = "";
+            } else if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
+                divHingeColour.style.display = "";
+                divTiltrodType.style.display = "";
+                divTiltrodSplit.style.display = "";
+                divCutOut.style.display = "";
+                divSpecialShape.style.display = "";
+                divLayoutCode.style.display = "";
+                divFrameType.style.display = "";
+                divHorizontalTPost.style.display = "";
+            } else if (blindName === "Track Bi-fold") {
+                divHingeColour.style.display = "";
+                divTiltrodType.style.display = "";
+                divTiltrodSplit.style.display = "";
+                divLayoutCode.style.display = "";
+                divFrameType.style.display = "";
+                divBottomTrackType.style.display = "";
+                divReverseHinged.style.display = "";
+                divPelmetFlat.style.display = "";
+                divExtraFascia.style.display = "";
+            } else if (blindName === "Track Sliding") {
+                divLouvrePosition.style.display = "";
+                divJoinedPanels.style.display = "";
+                divCustomHeaderLength.style.display = "";
+                divLayoutCode.style.display = "";
+                divFrameType.style.display = "";
+                divBottomTrackType.style.display = "";
+                divTiltrodType.style.display = "";
+                divTiltrodSplit.style.display = "";
+                divPelmetFlat.style.display = "";
+                divExtraFascia.style.display = "";
+            } else if (blindName === "Track Sliding Single Track") {
+                divJoinedPanels.style.display = "";
+                divCustomHeaderLength.style.display = "";
+                divLayoutCode.style.display = "";
+                divFrameType.style.display = "";
+                divFrameLeft.style.display = "";
+                divFrameRight.style.display = "";
+                divFrameTop.style.display = "";
+                divFrameBottom.style.display = "";
+                divBottomTrackType.style.display = "";
+                divTiltrodType.style.display = "";
+                divTiltrodSplit.style.display = "";
+                divPelmetFlat.style.display = "";
+                divExtraFascia.style.display = "";
+            } else if (blindName === "Fixed") {
+                divLayoutCode.style.display = "";
+                divFrameType.style.display = "";
+                divTiltrodType.style.display = "";
+                divTiltrodSplit.style.display = "";
+                divSpecialShape.style.display = "";
+            }
+        }).catch((error) => {
+            reject(error);
+        });
     }
 }
 
@@ -1421,29 +1377,18 @@ function visibleHingeColour(blindType, joinedPanels) {
 
         if (!blindType) return resolve();
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (
-                    blindName === "Hinged" ||
-                    blindName === "Hinged Bi-fold" ||
-                    blindName === "Track Bi-fold"
-                ) {
+        getBlindName(blindType).then((blindName) => {
+            if (blindName === "Hinged" || blindName === "Hinged Bi-fold" || blindName === "Track Bi-fold") {
+                divHingeColour.style.display = "";
+            } else if (blindName === "Track Sliding" || blindName === "Track Sliding Single Track") {
+                if (joinedPanels === "Yes") {
                     divHingeColour.style.display = "";
-                } else if (
-                    blindName === "Track Sliding" ||
-                    blindName === "Track Sliding Single Track"
-                ) {
-                    if (joinedPanels === "Yes") {
-                        divHingeColour.style.display = "";
-                    }
                 }
-
-                resolve();
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-                reject(error);
-            });
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -1485,17 +1430,14 @@ function visibleBuildout(blindType, frameType) {
 
         if (!blindType || !frameType) return resolve();
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
-                    divBuildout.style.display = "";
-                }
-                resolve();
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-                reject(error);
-            });
+        getBlindName(blindType).then((blindName) => {
+            if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
+                divBuildout.style.display = "";
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -1506,24 +1448,16 @@ function visibleBuildoutPosition(blindType, frameType, buildout) {
 
         if (!blindType || !frameType) return resolve();
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
-                    if (
-                        (frameType === "Small Bullnose Z Frame" ||
-                            frameType === "Large Bullnose Z Frame" ||
-                            frameType === "Colonial Z Frame") &&
-                        buildout !== ""
-                    ) {
-                        divBuildoutPosition.style.display = "";
-                    }
+        getBlindName(blindType).then((blindName) => {
+            if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
+                if ((frameType === "Small Bullnose Z Frame" || frameType === "Large Bullnose Z Frame" || frameType === "Colonial Z Frame") && buildout !== "") {
+                    divBuildoutPosition.style.display = "";
                 }
-                resolve();
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-                reject(error);
-            });
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -1534,20 +1468,14 @@ function visibleSameSize(blindType, layoutCode) {
 
         if (!blindType && !layoutCode) return resolve();
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (
-                    (blindName === "Hinged" || blindName === "Hinged Bi-fold") &&
-                    cekSameSizePanels(layoutCode)
-                ) {
-                    divSameSize.style.display = "";
-                }
-                resolve();
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-                reject(error);
-            });
+        getBlindName(blindType).then((blindName) => {
+            if ((blindName === "Hinged" || blindName === "Hinged Bi-fold") && cekSameSizePanels(layoutCode)) {
+                divSameSize.style.display = "";
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -1570,25 +1498,11 @@ function visibleGap(blindType, sameSize, layoutCode) {
 
         if (!blindType) return resolve();
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
-                    if (cekSameSizePanels(layoutCode)) {
-                        if (sameSize === "Yes") {
-                            divGapPost.style.display = "none";
-                        } else {
-                            let countT = 0;
-                            for (let char of layoutCode) {
-                                if (char === "T" || char === "B" || char === "C" || char === "G")
-                                    countT++;
-                            }
-                            if (countT > 0) divGapPost.style.display = "";
-                            if (countT > 0) divGap1.style.display = "";
-                            if (countT > 1) divGap2.style.display = "";
-                            if (countT > 2) divGap3.style.display = "";
-                            if (countT > 3) divGap4.style.display = "";
-                            if (countT > 4) divGap5.style.display = "";
-                        }
+        getBlindName(blindType).then((blindName) => {
+            if (blindName === "Hinged" || blindName === "Hinged Bi-fold") {
+                if (cekSameSizePanels(layoutCode)) {
+                    if (sameSize === "Yes") {
+                        divGapPost.style.display = "none";
                     } else {
                         let countT = 0;
                         for (let char of layoutCode) {
@@ -1602,7 +1516,7 @@ function visibleGap(blindType, sameSize, layoutCode) {
                         if (countT > 3) divGap4.style.display = "";
                         if (countT > 4) divGap5.style.display = "";
                     }
-                } else if (blindName === "Track Bi-fold") {
+                } else {
                     let countT = 0;
                     for (let char of layoutCode) {
                         if (char === "T" || char === "B" || char === "C" || char === "G")
@@ -1615,12 +1529,23 @@ function visibleGap(blindType, sameSize, layoutCode) {
                     if (countT > 3) divGap4.style.display = "";
                     if (countT > 4) divGap5.style.display = "";
                 }
-                resolve();
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-                reject(error);
-            });
+            } else if (blindName === "Track Bi-fold") {
+                let countT = 0;
+                for (let char of layoutCode) {
+                    if (char === "T" || char === "B" || char === "C" || char === "G")
+                        countT++;
+                }
+                if (countT > 0) divGapPost.style.display = "";
+                if (countT > 0) divGap1.style.display = "";
+                if (countT > 1) divGap2.style.display = "";
+                if (countT > 2) divGap3.style.display = "";
+                if (countT > 3) divGap4.style.display = "";
+                if (countT > 4) divGap5.style.display = "";
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -1631,23 +1556,16 @@ function visibleHingesLoose(blindType, hingeColour, joinedPanels) {
 
         if (!hingeColour) return resolve();
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (
-                    blindName === "Hinged" ||
-                    blindName === "Hinged Bi-fold" ||
-                    blindName === "Track Bi-fold"
-                ) {
-                    divHingesLoose.style.display = "";
-                } else if (blindName === "Track Sliding" && joinedPanels === "Yes") {
-                    divHingesLoose.style.display = "";
-                }
-                resolve();
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-                reject(error);
-            });
+        getBlindName(blindType).then((blindName) => {
+            if (blindName === "Hinged" || blindName === "Hinged Bi-fold" || blindName === "Track Bi-fold") {
+                divHingesLoose.style.display = "";
+            } else if (blindName === "Track Sliding" && joinedPanels === "Yes") {
+                divHingesLoose.style.display = "";
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
@@ -1658,30 +1576,20 @@ function visibleSemiInside(blindType, mounting) {
 
         if (!blindType) return resolve();
 
-        getBlindName(blindType)
-            .then((blindName) => {
-                if (
-                    (blindName === "Track Bi-fold" ||
-                        blindName === "Track Sliding" ||
-                        blindName === "Track Sliding Single Track") &&
-                    mounting === "Inside"
-                ) {
-                    divSemiInside.style.display = "";
-                }
-                resolve();
-            })
-            .catch((error) => {
-                console.error("Gagal mendapatkan blind name:", error);
-                reject(error);
-            });
+        getBlindName(blindType).then((blindName) => {
+            if ((blindName === "Track Bi-fold" || blindName === "Track Sliding" || blindName === "Track Sliding Single Track") && mounting === "Inside") {
+                divSemiInside.style.display = "";
+            }
+            resolve();
+        }).catch((error) => {
+            reject(error);
+        });
     });
 }
 
 function visibleBottomTrackReccess(bottomTrack) {
     return new Promise((resolve) => {
-        const divBottomTrackRecess = document.getElementById(
-            "divBottomTrackRecess"
-        );
+        const divBottomTrackRecess = document.getElementById("divBottomTrackRecess");
         divBottomTrackRecess.style.display = "none";
 
         const bottomtrackrecess = document.getElementById("bottomtrackrecess");
@@ -1815,9 +1723,7 @@ function proccess() {
                 toggleButtonState(false, "Submit");
             }
         },
-        error: function (xhr, status, error) {
-            console.error("AJAX Error:", error, xhr.responseText);
-            alert("Error: " + error);
+        error: function () {
             toggleButtonState(false, "Submit");
         },
     });
@@ -1940,8 +1846,7 @@ function bindItemOrder(itemId) {
                         reject(error);
                     });
             },
-            error: function (xhr, status, error) {
-                console.error("AJAX Error:", error, xhr.responseText);
+            error: function (error) {
                 document.getElementById("divLoader").style.display = "none";
                 reject(error);
             },
@@ -2005,7 +1910,6 @@ function setFormValues(itemData) {
     Object.keys(mapping).forEach((id) => {
         const el = document.getElementById(id);
         if (!el) {
-            console.warn(`Elemen '${id}' tidak ditemukan.`);
             return;
         }
 
@@ -2112,46 +2016,26 @@ function controlForm(status, isEditItem, isCopyItem) {
 function cekSameSizePanels(layoutCode) {
     if (layoutCode.length === 0) return false;
     if (layoutCode.includes("T")) {
-        if (
-            layoutCode.includes("B") ||
-            layoutCode.includes("C") ||
-            layoutCode.includes("G")
-        ) {
+        if (layoutCode.includes("B") || layoutCode.includes("C") || layoutCode.includes("G")) {
             return false;
         }
     }
     if (layoutCode.includes("B")) {
-        if (
-            layoutCode.includes("T") ||
-            layoutCode.includes("C") ||
-            layoutCode.includes("G")
-        ) {
+        if (layoutCode.includes("T") || layoutCode.includes("C") || layoutCode.includes("G")) {
             return false;
         }
     }
     if (layoutCode.includes("C")) {
-        if (
-            layoutCode.includes("T") ||
-            layoutCode.includes("B") ||
-            layoutCode.includes("G")
-        ) {
+        if (layoutCode.includes("T") || layoutCode.includes("B") || layoutCode.includes("G")) {
             return false;
         }
     }
     if (layoutCode.includes("G")) {
-        if (
-            layoutCode.includes("T") ||
-            layoutCode.includes("B") ||
-            layoutCode.includes("C")
-        ) {
+        if (layoutCode.includes("T") || layoutCode.includes("B") || layoutCode.includes("C")) {
             return false;
         }
     }
-    return (
-        layoutCode.includes("T") ||
-        layoutCode.includes("B") ||
-        layoutCode.includes("C") ||
-        layoutCode.includes("G")
+    return (layoutCode.includes("T") || layoutCode.includes("B") || layoutCode.includes("C") || layoutCode.includes("G")
     );
 }
 

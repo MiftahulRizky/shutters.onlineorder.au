@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Login - Lifestyle Blinds & Shutters</title>
+    <title>Login - LOOP</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link href="../Content/dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="../Content/dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
@@ -16,7 +16,6 @@
     <link href="../Content/dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
     <link href="../Content/dist/css/demo.min.css?1692870487" rel="stylesheet"/>
     <link rel="icon" type="image/x-icon" href="../Content/static/favicon.ico" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <style>
       :root {
       	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
@@ -37,19 +36,6 @@
         </asp:ScriptManager>
 
         <div class="page page-center mt-6">
-            <div class="container mt-3">
-                <div class="d-none d-md-flex float-end">
-                    <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
-                        data-bs-toggle="tooltip" data-bs-placement="bottom">
-                        <i class="ti ti-moon fs-2" width="24" height="24"></i>
-                    </a>
-                    <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
-                        data-bs-toggle="tooltip" data-bs-placement="bottom">
-                        <i class="ti ti-sun fs-2" width="24" height="24"></i>
-                    </a>
-                </div>
-            </div>
-
             <div class="container container-tight py-4">
                 <div class="text-center mb-5">
                     <a runat="server" href="~/" class="navbar-brand navbar-brand-autodark">

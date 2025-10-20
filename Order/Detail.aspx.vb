@@ -523,7 +523,6 @@ Partial Class Order_Detail
 
             exactCfg.CreateXML(lblHeaderId.Text, fileName, filePath)
             exactCfg.Connect(finalPath)
-            Threading.Thread.Sleep(3000)
 
             Response.Redirect("~/order/detail", False)
         Catch ex As Exception
@@ -2217,7 +2216,6 @@ Partial Class Order_Detail
                 gvList.Columns(4).Visible = True ' DESCRIPTION
                 gvList.Columns(5).Visible = True ' COST
                 gvList.Columns(6).Visible = True ' MARK UP
-                gvList.Columns(7).Visible = True ' FACTORY
                 gvList.Columns(8).Visible = True ' ACTION
             End If
 
@@ -2226,7 +2224,6 @@ Partial Class Order_Detail
                 gvList.Columns(3).Visible = True ' QTY
                 gvList.Columns(4).Visible = True ' DESCRIPTION
                 gvList.Columns(5).Visible = True ' COST
-                gvList.Columns(7).Visible = True ' FACTORY
                 gvList.Columns(8).Visible = True ' ACTION
             End If
 
@@ -2235,7 +2232,6 @@ Partial Class Order_Detail
                 gvList.Columns(3).Visible = True ' QTY
                 gvList.Columns(4).Visible = True ' DESCRIPTION
                 gvList.Columns(5).Visible = True ' COST
-                gvList.Columns(7).Visible = True ' FACTORY
                 gvList.Columns(8).Visible = True ' PAID
             End If
 
@@ -2244,7 +2240,6 @@ Partial Class Order_Detail
                 gvList.Columns(3).Visible = True ' QTY
                 gvList.Columns(4).Visible = True ' DESCRIPTION
                 gvList.Columns(5).Visible = True ' COST
-                gvList.Columns(7).Visible = True ' FACTORY
                 gvList.Columns(8).Visible = True ' ACTION
             End If
 
@@ -2452,6 +2447,56 @@ Partial Class Order_Detail
             If tubeType = "Track Only" Then
                 result = itemDescription & " - " & width & "mm"
             End If
+        End If
+
+
+
+        If designName = "Evolve Parts" Then
+            result = String.Format("{0}", itemDescription)
+
+            If partCategory = "Louvres" Then
+                result = String.Format("{0} - {1} {2}", itemDescription, partComponent, partColour)
+                If partComponent = "63mm Louvre" Or partComponent = "89mm Louvre" Then
+                    result = String.Format("{0} - {1} {2} ({3}mm)", itemDescription, partComponent, partColour, partLength)
+                End If
+            End If
+
+            If partCategory = "Framing | Hinged" OrElse partCategory = "Framing | Fixed" OrElse partCategory = "Extrusion" Then
+                result = String.Format("{0} - {1} {2} ({3}mm)", itemDescription, partComponent, partColour, partLength)
+            End If
+
+            If partCategory = "Framing | Bi-fold or Sliding" Then
+                result = String.Format("{0} - {1}", itemDescription, partComponent)
+                If Not (partComponent = "Fascia H Clip" OrElse partComponent = "Fascia Return Connector") Then
+                    result = String.Format("{0} - {1} {2} ({3}mm)", itemDescription, partComponent, partColour, partLength)
+                End If
+            End If
+
+            If partCategory = "Posts" Then
+                result = String.Format("{0} - {1} {2} ({3}mm)", itemDescription, partComponent, partColour, partLength)
+                If Not (partComponent = "T Post" OrElse partComponent = "90° Corner Post" OrElse partComponent = "135° Bay Post") Then
+                    result = String.Format("{0} - {1} {2}", itemDescription, partComponent, partColour)
+                End If
+            End If
+
+            If partCategory = "Hinges" Then
+                result = String.Format("{0} - {1} {2}", itemDescription, partComponent, partColour)
+                If partComponent = "Hinge Spacer" Then
+                    result = String.Format("{0} - {1}", itemDescription, partComponent)
+                End If
+            End If
+
+            If partCategory = "Catches" OrElse partCategory = "Misc" Then
+                result = String.Format("{0} - {1}", itemDescription, partComponent)
+            End If
+
+            If partCategory = "Track Hardware" Then
+                result = String.Format("{0} - {1} {2} ({3}mm)", itemDescription, partComponent, partColour, partLength)
+                If Not (partComponent = "Top Track" OrElse partComponent = "Bottom M Track") Then
+                    result = String.Format("{0} - {1}", itemDescription, partComponent)
+                End If
+            End If
+
         End If
 
         If designName = "Panorama PVC Parts" Then

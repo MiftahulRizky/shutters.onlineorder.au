@@ -283,11 +283,6 @@ Partial Class Order_Method
     End Function
 
     <WebMethod()>
-    Public Shared Function EvolvePartsProccess(data As ShutterData) As String
-        Return "Please contact Customer Service at customerservice@sunlight.com.au"
-    End Function
-
-    <WebMethod()>
     Public Shared Function EvolveProccess(data As ShutterData) As String
         Dim orderCfg As New OrderConfig
 
@@ -553,89 +548,89 @@ Partial Class Order_Method
 
         'GAP POSITION
         If String.IsNullOrEmpty(data.samesizepanel) And roleName = "Customer" Then
-            'If String.IsNullOrEmpty(data.samesizepanel) And roleName = "Customer" Then
-            '    If blindName = "Hinged" OrElse blindName = "Hinged Bi-fold" Then
-            '        Dim pemisah As Char() = {"T"c, "C"c, "B"c, "G"c}
+            If String.IsNullOrEmpty(data.samesizepanel) And roleName = "Customer" Then
+                If blindName = "Hinged" OrElse blindName = "Hinged Bi-fold" Then
+                    Dim pemisah As Char() = {"T"c, "C"c, "B"c, "G"c}
 
-            '        Dim gaps As Integer() = {gap1, gap2, gap3, gap4, gap5}
-            '        Dim totalWidth As Integer = width
+                    Dim gaps As Integer() = {gap1, gap2, gap3, gap4, gap5}
+                    Dim totalWidth As Integer = width
 
-            '        Dim sections As New List(Of String)
-            '        Dim startIndex As Integer = 0
-            '        Dim totalPemisah As Integer = 0
+                    Dim sections As New List(Of String)
+                    Dim startIndex As Integer = 0
+                    Dim totalPemisah As Integer = 0
 
-            '        ' 🔹 Hitung jumlah pemisah & pecah layout jadi section
-            '        For i As Integer = 1 To layoutCode.Length - 1
-            '            If pemisah.Contains(layoutCode(i)) Then
-            '                totalPemisah += 1
-            '                sections.Add(layoutCode.Substring(startIndex, i - startIndex + 1))
-            '                startIndex = i
-            '            End If
-            '        Next
-            '        If startIndex < layoutCode.Length Then
-            '            sections.Add(layoutCode.Substring(startIndex))
-            '        End If
+                    ' 🔹 Hitung jumlah pemisah & pecah layout jadi section
+                    For i As Integer = 1 To layoutCode.Length - 1
+                        If pemisah.Contains(layoutCode(i)) Then
+                            totalPemisah += 1
+                            sections.Add(layoutCode.Substring(startIndex, i - startIndex + 1))
+                            startIndex = i
+                        End If
+                    Next
+                    If startIndex < layoutCode.Length Then
+                        sections.Add(layoutCode.Substring(startIndex))
+                    End If
 
-            '        ' 🔹 SKIP semua validasi GAP & panel width jika totalPemisah = 0
-            '        If totalPemisah > 0 Then
-            '            ' 🔹 VALIDASI GAP HARUS ADA (TIDAK BOLEH 0)
-            '            For g As Integer = 0 To totalPemisah - 1
-            '                If gaps(g) <= 0 Then
-            '                    Return $"GAP {g + 1} IS REQUIRED. PLEASE INPUT A VALID VALUE."
-            '                End If
-            '            Next
+                    ' 🔹 SKIP semua validasi GAP & panel width jika totalPemisah = 0
+                    If totalPemisah > 0 Then
+                        ' 🔹 VALIDASI GAP HARUS ADA (TIDAK BOLEH 0)
+                        For g As Integer = 0 To totalPemisah - 1
+                            If gaps(g) <= 0 Then
+                                Return String.Format("GAP {0} IS REQUIRED. PLEASE INPUT A VALID VALUE.", g + 1)
+                            End If
+                        Next
 
-            '            ' 🔹 VALIDASI GAP HARUS BERURUTAN
-            '            For g As Integer = 0 To totalPemisah - 2
-            '                If gaps(g) > gaps(g + 1) Then
-            '                    Return $"GAP {g + 1} ({gaps(g)}) CANNOT BE GREATER THAN GAP {g + 2} ({gaps(g + 1)})."
-            '                End If
-            '            Next
+                        ' 🔹 VALIDASI GAP HARUS BERURUTAN
+                        For g As Integer = 0 To totalPemisah - 2
+                            If gaps(g) > gaps(g + 1) Then
+                                Return String.Format("GAP {0} ({1}) CANNOT BE GREATER THAN GAP {2} ({3}).", g + 1, gaps(g), g + 2, gaps(g + 1))
+                            End If
+                        Next
 
-            '            Dim sumGapUsed As Integer = 0
+                        Dim sumGapUsed As Integer = 0
 
-            '            For idx As Integer = 0 To sections.Count - 1
-            '                Dim section As String = sections(idx)
-            '                Dim panelCount As Integer = section.Count(Function(ch) "LRFM".Contains(ch))
+                        For idx As Integer = 0 To sections.Count - 1
+                            Dim section As String = sections(idx)
+                            Dim panelCount As Integer = section.Count(Function(ch) "LRFM".Contains(ch))
 
-            '                Dim currentGap As Integer
-            '                If idx = sections.Count - 1 Then
-            '                    ' 🔹 Panel terakhir: sisa width
-            '                    currentGap = totalWidth - sumGapUsed
-            '                Else
-            '                    If idx = 0 Then
-            '                        ' 🔹 Section pertama → pakai GAP1 langsung
-            '                        currentGap = gaps(0)
-            '                        sumGapUsed += currentGap
-            '                    Else
-            '                        ' 🔹 Section berikutnya → selisih GAP sekarang - GAP sebelumnya
-            '                        currentGap = gaps(idx) - gaps(idx - 1)
-            '                        sumGapUsed += currentGap
-            '                    End If
-            '                End If
+                            Dim currentGap As Integer
+                            If idx = sections.Count - 1 Then
+                                ' 🔹 Panel terakhir: sisa width
+                                currentGap = totalWidth - sumGapUsed
+                            Else
+                                If idx = 0 Then
+                                    ' 🔹 Section pertama → pakai GAP1 langsung
+                                    currentGap = gaps(0)
+                                    sumGapUsed += currentGap
+                                Else
+                                    ' 🔹 Section berikutnya → selisih GAP sekarang - GAP sebelumnya
+                                    currentGap = gaps(idx) - gaps(idx - 1)
+                                    sumGapUsed += currentGap
+                                End If
+                            End If
 
-            '                Dim dataGap As Object() = {
-            '                    blindName, "Gap", currentGap, data.mounting,
-            '                    section, data.frametype, data.frameleft,
-            '                    data.frameright, panelCount
-            '                }
+                            Dim dataGap As Object() = {
+                                blindName, "Gap", currentGap, data.mounting,
+                                section, data.frametype, data.frameleft,
+                                data.frameright, panelCount
+                            }
 
-            '                Dim widthDeduct As Decimal = orderCfg.WidthDeductEvolve(dataGap)
+                            Dim widthDeduct As Decimal = orderCfg.WidthDeductEvolve(dataGap)
 
-            '                ' 🔹 VALIDASI PANEL WIDTH
-            '                If widthDeduct < 200 Then
-            '                    Return $"MINIMUM PANEL WIDTH IS 200MM.<br />FINAL PANEL WIDTH IN SECTION {idx + 1} IS {widthDeduct} !"
-            '                End If
-            '                If blindName = "Hinged Bi-fold" AndAlso widthDeduct > 650 Then
-            '                    Return $"MAXIMUM PANEL WIDTH FOR HINGED BI-FOLD IS 650MM.<br />FINAL PANEL WIDTH IN SECTION {idx + 1} IS {widthDeduct} !"
-            '                End If
-            '                If widthDeduct > 900 Then
-            '                    Return $"MAXIMUM PANEL WIDTH IS 900MM.<br />FINAL PANEL WIDTH IN SECTION {idx + 1} IS {widthDeduct} !"
-            '                End If
-            '            Next
-            '        End If
-            '    End If
-            'End If
+                            ' 🔹 VALIDASI PANEL WIDTH
+                            If widthDeduct < 200 Then
+                                Return String.Format("MINIMUM PANEL WIDTH IS 200MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
+                            End If
+                            If blindName = "Hinged Bi-fold" AndAlso widthDeduct > 650 Then
+                                Return String.Format("MAXIMUM PANEL WIDTH FOR HINGED BI-FOLD IS 650MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
+                            End If
+                            If widthDeduct > 900 Then
+                                Return String.Format("MAXIMUM PANEL WIDTH IS 900MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
+                            End If
+                        Next
+                    End If
+                End If
+            End If
         End If
 
         If Not String.IsNullOrEmpty(data.notes) Then
@@ -1064,57 +1059,122 @@ Partial Class Order_Method
     End Function
 
     <WebMethod()>
-    Public Shared Function PanoramaPartsProccess(data As PartData) As String
+    Public Shared Function PartsProccess(data As ProcessData) As String
         Dim orderCfg As New OrderConfig
+
+        Dim myConn As String = ConfigurationManager.ConnectionStrings("DefaultConnection").ConnectionString
+
+        Dim qty As Integer
+        Dim length As Integer
+        Dim markup As Integer
+
+        Dim designName As String = orderCfg.GetItemData("SELECT Name FROM Designs WHERE Id='" + data.designid + "'")
+
+        Dim customerPriceGroup As String = orderCfg.GetItemData("SELECT Customers.Pricing FROM Customers INNER JOIN OrderHeaders ON Customers.Id = OrderHeaders.CustomerId WHERE OrderHeaders.Id='" + data.headerid + "'")
+
 
         If String.IsNullOrEmpty(data.blindtype) Then Return "TYPE IS REQUIRED !"
         If String.IsNullOrEmpty(data.colourtype) Then Return "PRODUCT IS REQUIRED !"
 
-        Dim qty As Integer
         If String.IsNullOrEmpty(data.qty) Then Return "QTY IS REQUIRED !"
         If Not Integer.TryParse(data.qty, qty) OrElse qty <= 0 Then Return "PLEASE CHECK YOUR QTY ORDER !"
 
         If String.IsNullOrEmpty(data.category) Then Return "CATEGORY IS REQUIRED !"
         If String.IsNullOrEmpty(data.component) Then Return "COMPONENT IS REQUIRED !"
 
-        If data.category = "Louvres" Or data.category = "Framing | Hinged" Or data.category = "Framing | Bi-fold or Sliding" Or data.category = "Framing | Fixed" Or data.category = "Extrusion" Or data.category = "Mist" Then
+        '#-------------------------------------------------------------|| Colour Validate ||-------------------------------------------------------------#
+        If data.category = "Louvres" OrElse data.category = "Framing | Hinged" OrElse data.category = "Framing | Fixed" OrElse data.category = "Extrusion" Then
             If String.IsNullOrEmpty(data.colour) Then Return "COLOUR IS REQUIRED !"
         End If
 
-        If data.category = "Post" And (data.component = "T-Post" Or data.component = "90° Corner Post" Or data.component = "135° Bay Post") And String.IsNullOrEmpty(data.colour) Then
-            Return "COLOUR IS REQUIRED !"
+        If designName = "Panorama PVC Parts" Then
+            If data.category = "Hinges" And (data.component = "76mm Non-Mortise Hinge" Or data.component = "76mm Rabbet Hinge") And String.IsNullOrEmpty(data.colour) Then
+                Return "COLOUR IS REQUIRED !"
+            End If
+
+            If data.category = "Magnets and Strikers" And (data.component = "Standard Striker Plate" Or data.component = "L Shape Striker Plate") And String.IsNullOrEmpty(data.colour) Then
+                Return "COLOUR IS REQUIRED !"
+            End If
+
+            If data.category = "Framing | Bi-fold or Sliding" OrElse data.category = "Mist" Then
+                If String.IsNullOrEmpty(data.colour) Then Return "COLOUR IS REQUIRED !"
+            End If
+
+            If data.category = "Posts" And (data.component = "T-Post" Or data.component = "90° Corner Post" Or data.component = "135° Bay Post") And String.IsNullOrEmpty(data.colour) Then
+                Return "COLOUR IS REQUIRED !"
+            End If
         End If
 
-        If data.category = "Hinges" And (data.component = "76mm Non-Mortise Hinge" Or data.component = "76mm Rabbet Hinge") And String.IsNullOrEmpty(data.colour) Then
-            Return "COLOUR IS REQUIRED !"
-        End If
+        If designName = "Evolve Parts" Then
 
-        If data.category = "Magnets and Strikers" And (data.component = "Standard Striker Plate" Or data.component = "L Shape Striker Plate") And String.IsNullOrEmpty(data.colour) Then
-            Return "COLOUR IS REQUIRED !"
-        End If
+            If data.category = "Framing | Bi-fold or Sliding" Then
+                If Not (data.component ="Fascia H Clip" OrElse data.component = "Fascia Return Connector") Then
+                    If String.IsNullOrEmpty(data.colour) Then Return "COLOUR IS REQUIRED !"
+                End If
+            End If
+            If data.category = "Posts" Then
+                If String.IsNullOrEmpty(data.colour) Then Return "COLOUR IS REQUIRED !"
+            End If
 
-        Dim length As Integer
+            If data.category = "Hinges" AndAlso (data.component = "60mm Non-Mortise Hinge" OrElse data.component = "60mm Rabbet Hinge") Then
+                If String.IsNullOrEmpty(data.colour) Then Return "COLOUR IS REQUIRED !"
+            End If
+
+            If data.category = "Track Hardware" AndAlso (data.component = "Top Track" OrElse data.component = "Bottom M Track") Then
+                If String.IsNullOrEmpty(data.colour) Then Return "COLOUR IS REQUIRED !"
+            End If
+        End If
+        '#-------------------------------------------------------------|| /Colour Validate ||-------------------------------------------------------------#
+
+        '#-------------------------------------------------------------|| Length Validate ||-------------------------------------------------------------#
         If data.category = "Louvres" Then
-            If data.component = "63mm Louvre" Or data.component = "89mm Louvre" Or data.component = "114mm Louvre" Then
+            If data.component = "63mm Louvre" OrElse data.component = "89mm Louvre" OrElse data.component = "114mm Louvre" Then
                 If String.IsNullOrEmpty(data.length) Then Return "LENGTH IS REQUIRED !"
                 If Not Integer.TryParse(data.length, length) OrElse length <= 0 Then Return "PLEASE CHECK YOUR LENGTH ORDER !"
             End If
         End If
 
-        If data.category = "Framing | Hinged" Or data.category = "Framing | Bi-fold or Sliding" Or data.category = "Framing | Fixed" Or data.category = "Post" Then
+        If data.category = "Framing | Hinged" OrElse data.category = "Framing | Fixed" OrElse data.category = "Extrusion" Then
             If String.IsNullOrEmpty(data.length) Then Return "LENGTH IS REQUIRED !"
             If Not Integer.TryParse(data.length, length) OrElse length <= 0 Then Return "PLEASE CHECK YOUR LENGTH ORDER !"
-            If length > 3050 Then Return "MAXIMUM LENGTH IS 3050mm !"
+            If length > 3050 Then Return "MAXIMUM LENGTH IS 3050MM !"
         End If
 
-        If data.category = "Extrusion" Then
-            If String.IsNullOrEmpty(data.length) Then Return "LENGTH IS REQUIRED !"
-            If Not Integer.TryParse(data.length, length) OrElse length <= 0 Then Return "PLEASE CHECK YOUR LENGTH ORDER !"
+        If designName = "Evolve Parts" Then
+
+            If data.category = "Framing | Bi-fold or Sliding" Then
+                If Not (data.component = "Fascia H Clip" OrElse data.component = "Fascia Return Connector" OrElse data.component = "106mm Header Support Bracket" OrElse data.component = "142mm Header Support Bracket") Then
+                    If String.IsNullOrEmpty(data.length) Then Return "LENGTH IS REQUIRED !"
+                    If Not Integer.TryParse(data.length, length) OrElse length <= 0 Then Return "PLEASE CHECK YOUR LENGTH ORDER !"
+                    If length > 3050 Then Return "MAXIMUM LENGTH IS 3050MM !"
+                End If
+            End If
+
+            If data.category = "Posts" Then
+                If data.component = "T Post" OrElse data.component = "90° Corner Post" OrElse data.component = "135° Bay Post"  Then
+                    If String.IsNullOrEmpty(data.length) Then Return "LENGTH IS REQUIRED !"
+                    If Not Integer.TryParse(data.length, length) OrElse length <= 0 Then Return "PLEASE CHECK YOUR LENGTH ORDER !"
+                    If length > 3050 Then Return "MAXIMUM LENGTH IS 3050MM !"
+                End If
+            End If
+
         End If
+
+        If designName = "Panorama PVC Parts" Then
+            If data.category = "Framing | Bi-fold or Sliding" OrElse data.category = "Posts" Then
+                If String.IsNullOrEmpty(data.length) Then Return "LENGTH IS REQUIRED !"
+                If Not Integer.TryParse(data.length, length) OrElse length <= 0 Then Return "PLEASE CHECK YOUR LENGTH ORDER !"
+                If length > 3050 Then Return "MAXIMUM LENGTH IS 3050MM !"
+            End If
+        End If
+
+
         If data.category = "Track Hardware" And (data.component = "Top Track" Or data.component = "Bottom M Track" Or data.component = "Bottom U Track") Then
             If String.IsNullOrEmpty(data.length) Then Return "LENGTH IS REQUIRED !"
             If Not Integer.TryParse(data.length, length) OrElse length <= 0 Then Return "PLEASE CHECK YOUR LENGTH ORDER !"
         End If
+        '#-------------------------------------------------------------|| /Length Validate ||-------------------------------------------------------------#
+
 
         If Not String.IsNullOrEmpty(data.notes) Then
             If data.notes.IndexOfAny({","c, "&"c, "`"c, "'"c}) >= 0 OrElse data.notes.Contains("&=") OrElse data.notes.Contains("&+") Then
@@ -1123,14 +1183,14 @@ Partial Class Order_Method
             If data.notes.Trim().Length > 1000 Then Return "MAXIMUM 1000 CHARACTERS !"
         End If
 
-        Dim markup As Integer
         If Not String.IsNullOrEmpty(data.markup) Then
             If Not Integer.TryParse(data.markup, markup) OrElse markup < 0 Then Return "PLEASE CHECK YOUR MARK UP ORDER !"
         End If
 
-        Dim myConn As String = ConfigurationManager.ConnectionStrings("DefaultConnection").ConnectionString
 
-        Dim customerPriceGroup As String = orderCfg.GetItemData("SELECT Customers.Pricing FROM Customers INNER JOIN OrderHeaders ON Customers.Id = OrderHeaders.CustomerId WHERE OrderHeaders.Id='" + data.headerid + "'")
+
+
+       
 
         Dim productpriceGroupName As String = data.component
         If customerPriceGroup = "Sunlight" Then
@@ -1138,8 +1198,9 @@ Partial Class Order_Method
         End If
         Dim productpriceGroupId As String = orderCfg.GetProductPriceGroupId(data.designid, productpriceGroupName)
 
+        '#-------------------------------------------------------------|| Defind Colour & Length Value ||-------------------------------------------------------------#
         If data.category = "Louvres" Then
-            If data.component = "Standard Louvre Pin" Or data.category = "Louvre Pin" Then
+            If data.component = "Standard Louvre Pin" OrElse data.category = "Louvre Repair Pin" Then
                 length = 0
             End If
         End If
@@ -1165,17 +1226,27 @@ Partial Class Order_Method
             End If
         End If
 
-        If data.category = "Track Hardware" Then
-            data.colour = String.Empty
-            If data.component = "Top Pivot Set" Or data.component = "Bottom Pivot (Incl Bracket)" Or data.component = "Wheel Carrier" Or data.component = "Spring Loaded Guide" Or data.component = "Adjustment Spanner" Or data.component = "Track Stop" Then
-                length = 0
+        If designName = "Panorama PVC Parts" Then
+            If data.category = "Track Hardware" Then
+                data.colour = String.Empty
+                If data.component = "Top Pivot Set" Or data.component = "Bottom Pivot (Incl Bracket)" Or data.component = "Wheel Carrier" Or data.component = "Spring Loaded Guide" Or data.component = "Adjustment Spanner" Or data.component = "Track Stop" Then
+                    length = 0
+                End If
+            End If
+        End If
+
+        If designName = "Evolve Parts" Then
+            If data.category = "Track Hardware" Then
+                If Not (data.component = "Top Track" OrElse data.component = "Bottom M Track") Then
+                    data.colour = String.Empty
+                    length = 0
+                End If
             End If
         End If
 
         If data.category = "Misc" Then length = 0
+        '#-------------------------------------------------------------|| /Defind Colour & Length Value ||-------------------------------------------------------------#
 
-        Dim designName As String = orderCfg.GetItemData("SELECT Name FROM Designs WHERE Id = '" + data.designid + "'")
-        Dim micronetId As String = orderCfg.GetItemData("SELECT MicronetId FROM Micronets WHERE Name = '" + designName + "'")
         Dim exactId As String = orderCfg.GetItemData("SELECT ExactId FROM Exacts WHERE Name = '" + designName + "'")
 
         Dim linearMetre As Decimal = Math.Round(length / 1000, 4)
@@ -1184,14 +1255,13 @@ Partial Class Order_Method
             Dim itemId As String = orderCfg.CreateOrderItemId()
 
             Using thisConn As SqlConnection = New SqlConnection(myConn)
-                Using myCmd As SqlCommand = New SqlCommand("INSERT INTO OrderDetails(Id, Number, HeaderId, ProductId, MicronetId, ExactId, ProductPriceGroupId, Qty, PartCategory, PartComponent, PartColour, PartLength, LinearMetre, PanelQty, Notes, Cost, CostOverride, Discount, FinalCost, MarkUp, TotalBlinds, Production, Paid, Active) VALUES(@Id, @Number, @HeaderId, @ProductId, @MicronetId, @ExactId, @ProductPriceGroupId, @Qty, @PartCategory, @PartComponent, @PartColour, @PartLength, @LinearMetre, @PanelQty, @Notes, 0, 0, 0, 0, @MarkUp, @TotalBlinds, @Production, 0, 1)")
+                Using myCmd As SqlCommand = New SqlCommand("INSERT INTO OrderDetails(Id, Number, HeaderId, ProductId, ExactId, ProductPriceGroupId, Qty, PartCategory, PartComponent, PartColour, PartLength, LinearMetre, PanelQty, Notes, Cost, CostOverride, Discount, FinalCost, MarkUp, TotalBlinds, Production, Paid, Active) VALUES(@Id, @Number, @HeaderId, @ProductId, @ExactId, @ProductPriceGroupId, @Qty, @PartCategory, @PartComponent, @PartColour, @PartLength, @LinearMetre, @PanelQty, @Notes, 0, 0, 0, 0, @MarkUp, @TotalBlinds, @Production, 0, 1)", thisConn)
                     myCmd.Parameters.AddWithValue("@Id", itemId)
                     myCmd.Parameters.AddWithValue("@Number", orderCfg.CreateOrderItemNumber(data.headerid))
                     myCmd.Parameters.AddWithValue("@HeaderId", data.headerid)
                     myCmd.Parameters.AddWithValue("@ProductId", UCase(data.colourtype).ToString())
-                    myCmd.Parameters.AddWithValue("@MicronetId", micronetId)
                     myCmd.Parameters.AddWithValue("@ExactId", exactId)
-                    myCmd.Parameters.AddWithValue("@ProductPriceGroupId", UCase(productpriceGroupId).ToString())
+                    myCmd.Parameters.AddWithValue("@ProductPriceGroupId", If(String.IsNullOrEmpty(productpriceGroupId), DBNull.Value, UCase(productpriceGroupId).ToString()))
                     myCmd.Parameters.AddWithValue("@Qty", qty)
                     myCmd.Parameters.AddWithValue("@PartCategory", data.category)
                     myCmd.Parameters.AddWithValue("@PartComponent", data.component)
@@ -1204,10 +1274,8 @@ Partial Class Order_Method
                     myCmd.Parameters.AddWithValue("@TotalBlinds", qty)
                     myCmd.Parameters.AddWithValue("@Production", "Orion")
 
-                    myCmd.Connection = thisConn
                     thisConn.Open()
                     myCmd.ExecuteNonQuery()
-                    thisConn.Close()
                 End Using
             End Using
 
@@ -1229,12 +1297,11 @@ Partial Class Order_Method
         If data.itemaction = "EditItem" Or data.itemaction = "ViewItem" Then
             Dim itemId As String = data.itemid
             Using thisConn As SqlConnection = New SqlConnection(myConn)
-                Using myCmd As SqlCommand = New SqlCommand("UPDATE OrderDetails SET ProductId=@ProductId, MicronetId=@MicronetId, ExactId=@ExactId, ProductPriceGroupId=@ProductPriceGroupId, Qty=@Qty, PartCategory=@PartCategory, PartComponent=@PartComponent, PartColour=@PartColour, PartLength=@PartLength, LinearMetre=@LinearMetre, PanelQty=@PanelQty, Notes=@Notes, Cost=0.00, CostOverride=0.00, FinalCost=0.00, MarkUp=@MarkUp, Production=@Production, TotalBlinds=@TotalBlinds, Active=1 WHERE Id=@Id")
+                Using myCmd As SqlCommand = New SqlCommand("UPDATE OrderDetails SET ProductId=@ProductId, ExactId=@ExactId, ProductPriceGroupId=@ProductPriceGroupId, Qty=@Qty, PartCategory=@PartCategory, PartComponent=@PartComponent, PartColour=@PartColour, PartLength=@PartLength, LinearMetre=@LinearMetre, PanelQty=@PanelQty, Notes=@Notes, Cost=0.00, CostOverride=0.00, FinalCost=0.00, MarkUp=@MarkUp, Production=@Production, TotalBlinds=@TotalBlinds, Active=1 WHERE Id=@Id", thisConn)
                     myCmd.Parameters.AddWithValue("@Id", data.itemid)
                     myCmd.Parameters.AddWithValue("@ProductId", UCase(data.colourtype).ToString())
-                    myCmd.Parameters.AddWithValue("@MicronetId", micronetId)
                     myCmd.Parameters.AddWithValue("@ExactId", exactId)
-                    myCmd.Parameters.AddWithValue("@ProductPriceGroupId", UCase(productpriceGroupId).ToString())
+                    myCmd.Parameters.AddWithValue("@ProductPriceGroupId", If(String.IsNullOrEmpty(productpriceGroupId), DBNull.Value, UCase(productpriceGroupId).ToString()))
                     myCmd.Parameters.AddWithValue("@Qty", qty)
                     myCmd.Parameters.AddWithValue("@PartCategory", data.category)
                     myCmd.Parameters.AddWithValue("@PartComponent", data.component)
@@ -1247,10 +1314,8 @@ Partial Class Order_Method
                     myCmd.Parameters.AddWithValue("@TotalBlinds", qty)
                     myCmd.Parameters.AddWithValue("@Production", "Orion")
 
-                    myCmd.Connection = thisConn
                     thisConn.Open()
                     myCmd.ExecuteNonQuery()
-                    thisConn.Close()
                 End Using
             End Using
 
@@ -1266,6 +1331,7 @@ Partial Class Order_Method
 
             orderCfg.UpdateProductType(data.headerid)
 
+            ' Return "itemId :" & itemId
             Return "Success"
         End If
 
@@ -1314,8 +1380,8 @@ Partial Class Order_Method
             If data.louvreposition = "Open" And data.louvresize = "114" Then Return "THE LOUVRE SIZE & LOUVRE POSITION YOU SELECT CANNOT BE PROCESSED !"
         End If
 
-        Dim midrailHeight1 As Integer
-        Dim midrailHeight2 As Integer
+        Dim midrailHeight1 As Integer = 0
+        Dim midrailHeight2 As Integer = 0
 
         If Not String.IsNullOrEmpty(data.midrailheight1) Then
             If Not Integer.TryParse(data.midrailheight1, midrailHeight1) OrElse midrailHeight1 < 0 Then Return "PLEASE CHECK YOUR MIDRAIL HEIGHT 1 ORDER !"
@@ -1329,38 +1395,39 @@ Partial Class Order_Method
         If midrailHeight2 >= drop Then
             Return "THE HEIGHT OF MIDRAIL 2 SHOULD NOT BE EQUAL TO OR MORE THAN YOUR ORDER HEIGHT"
         End If
-        If drop > 1500 Then
-            If midrailHeight1 = 0 Then
-                Return "MIDRAIL HEIGHT IS REQUIRED. <br /> MAXIMUM ONE SECTION IS 1500MM !"
-            End If
-        End If
         If roleName = "Customer" Then
-            If midrailHeight1 > 0 And midrailHeight2 = 0 Then
-                If midrailHeight1 > 1500 Then
-                    Return "MAXIMUM MIDRAIL HEIGHT 1 IS 1500MM !"
-                End If
-                If drop - midrailHeight1 > 1500 Then
-                    Return "MAXIMUM MIDRAIL HEIGHT FOR OTHER SECTIONS IS 1500mm !"
-                End If
-            End If
-            If midrailHeight1 > 0 And midrailHeight2 > 0 Then
-                If midrailHeight1 = midrailHeight2 Then
-                    Return "MIDRAIL HEIGHT IS IN THE SAME POSITION. PLEASE CHANGE MIDRAIL HEIGHT POSITION 2"
-                End If
-                If midrailHeight1 > midrailHeight2 Then
-                    Return "THE HEIGHT OF MIDRAIL 1 SHOULD NOT BE GREATER THAN THE HEIGHT OF MIDRAIL 2 !"
-                End If
+            'If drop > 1600 Then
+            '    If midrailHeight1 = 0 Then
+            '        Return "MIDRAIL HEIGHT IS REQUIRED. <br /> MAXIMUM ONE SECTION IS 1500MM !"
+            '    End If
+            'End If
 
-                If midrailHeight1 > 1500 Then
-                    Return "MAXIMUM ONE SECTION IS 1500MM "
-                End If
-                If midrailHeight2 - midrailHeight1 > 1500 Then
-                    Return "MAXIMUM ONE SECTION IS 1500MM !"
-                End If
-                If drop - midrailHeight2 > 1500 Then
-                    Return "MAXIMUM ONE SECTION IS 1500MM !"
-                End If
-            End If
+            'If midrailHeight1 > 0 And midrailHeight2 = 0 Then
+            '    If midrailHeight1 > 1600 Then
+            '        Return "MAXIMUM MIDRAIL HEIGHT 1 IS 1500MM !"
+            '    End If
+            '    If drop - midrailHeight1 > 1600 Then
+            '        Return "MAXIMUM MIDRAIL HEIGHT FOR OTHER SECTIONS IS 1500mm !"
+            '    End If
+            'End If
+            'If midrailHeight1 > 0 And midrailHeight2 > 0 Then
+            '    If midrailHeight1 = midrailHeight2 Then
+            '        Return "MIDRAIL HEIGHT IS IN THE SAME POSITION. PLEASE CHANGE MIDRAIL HEIGHT POSITION 2"
+            '    End If
+            '    If midrailHeight1 > midrailHeight2 Then
+            '        Return "THE HEIGHT OF MIDRAIL 1 SHOULD NOT BE GREATER THAN THE HEIGHT OF MIDRAIL 2 !"
+            '    End If
+
+            '    If midrailHeight1 > 1500 Then
+            '        Return "MAXIMUM ONE SECTION IS 1500MM "
+            '    End If
+            '    If midrailHeight2 - midrailHeight1 > 1500 Then
+            '        Return "MAXIMUM ONE SECTION IS 1500MM !"
+            '    End If
+            '    If drop - midrailHeight2 > 1500 Then
+            '        Return "MAXIMUM ONE SECTION IS 1500MM !"
+            '    End If
+            'End If
         End If
 
         If blindName = "Hinged" Or blindName = "Hinged Bi-fold" Or blindName = "Track Bi-fold" Then
@@ -1438,6 +1505,10 @@ Partial Class Order_Method
             If String.IsNullOrEmpty(data.bottomtracktype) Then
                 Return "BOTTOM TRACK TYPE IS REQUIRED !"
             End If
+
+            If data.bottomtracktype = "M Track" AndAlso data.bottomtrackrecess = "" Then
+                Return "BOTTOM TRACK RECESS IS REQUIRED !"
+            End If
         End If
 
         If blindName = "Hinged" Or blindName = "Hinged Bi-fold" Then
@@ -1499,7 +1570,7 @@ Partial Class Order_Method
         panelQty = orderCfg.GetPanelQty(datacheckPanelQty)
 
         'DEDUCTIONS
-        If roleName = "Customer" Then
+        If roleName = "Customer" And (data.mounting = "Inside" Or data.mounting = "Outside") Then
             Dim dataWidthDeductions As Object() = {blindName, "All", width, data.mounting, layoutCode, data.frametype, data.frameleft, data.frameright, panelQty}
             Dim dataHeightDeductions As String() = {blindName, drop, data.mounting, data.frametype, data.frametop, data.framebottom, data.bottomtracktype, data.horizontaltpost}
 
@@ -1560,7 +1631,7 @@ Partial Class Order_Method
 
             If blindName = "Track Sliding" Then
                 If panelWidth < 200 Then Return "MINIMUM PANEL WIDTH IS 200mm !"
-                If panelWidth > 900 Then Return "MINIMUM PANEL WIDTH IS 900mm !"
+                If panelWidth > 900 Then Return "MAXIMUM PANEL WIDTH IS 900mm !"
                 If panelHeight < 282 And data.louvresize = "63" Then Return "MINIMUM PANEL HEIGHT IS 282mm !"
                 If panelHeight < 333 And data.louvresize = "89" Then Return "MINIMUM PANEL HEIGHT IS 333mm !"
                 If panelHeight < 384 And data.louvresize = "114" Then Return "MINIMUM PANEL HEIGHT IS 384mm !"
@@ -1569,7 +1640,7 @@ Partial Class Order_Method
 
             If blindName = "Track Sliding Single Track" Then
                 If panelWidth < 200 Then Return "MINIMUM PANEL WIDTH IS 200mm !"
-                If panelWidth > 900 Then Return "MINIMUM PANEL WIDTH IS 900mm !"
+                If panelWidth > 900 Then Return "MAXIMUM PANEL WIDTH IS 900mm !"
                 If panelHeight < 282 And data.louvresize = "63" Then Return "MINIMUM PANEL HEIGHT IS 282mm !"
                 If panelHeight < 333 And data.louvresize = "89" Then Return "MINIMUM PANEL HEIGHT IS 333mm !"
                 If panelHeight < 384 And data.louvresize = "114" Then Return "MINIMUM PANEL HEIGHT IS 384mm !"
@@ -1578,7 +1649,7 @@ Partial Class Order_Method
 
             If blindName = "Fixed" Then
                 If panelWidth < 200 Then Return "MINIMUM PANEL WIDTH IS 200mm !"
-                If panelWidth > 900 Then Return "MINIMUM PANEL WIDTH IS 900mm !"
+                If panelWidth > 900 Then Return "MAXIMUM PANEL WIDTH IS 900mm !"
                 If panelHeight < 282 And data.louvresize = "63" Then Return "MINIMUM PANEL HEIGHT IS 282mm !"
                 If panelHeight < 333 And data.louvresize = "89" Then Return "MINIMUM PANEL HEIGHT IS 333mm !"
                 If panelHeight < 384 And data.louvresize = "114" Then Return "MINIMUM PANEL HEIGHT IS 384mm !"
@@ -1590,82 +1661,83 @@ Partial Class Order_Method
 
         ' GAP POSITION
         If String.IsNullOrEmpty(data.samesizepanel) And roleName = "Customer" Then
-            'If blindName = "Hinged" OrElse blindName = "Hinged Bi-fold" Then
-            '    Dim pemisah As Char() = {"T"c, "C"c, "B"c, "G"c}
+            If (blindName = "Hinged" OrElse blindName = "Hinged Bi-fold") AndAlso (data.mounting = "Inside" OrElse data.mounting = "Outside") Then
+                Dim pemisah As Char() = {"T"c, "C"c, "B"c, "G"c}
 
-            '    Dim gaps As Integer() = {gap1, gap2, gap3, gap4, gap5}
-            '    Dim totalWidth As Integer = width
+                Dim gaps As Integer() = {gap1, gap2, gap3, gap4, gap5}
+                Dim totalWidth As Integer = width
 
-            '    Dim sections As New List(Of String)
-            '    Dim startIndex As Integer = 0
-            '    Dim totalPemisah As Integer = 0
+                Dim sections As New List(Of String)
+                Dim startIndex As Integer = 0
+                Dim totalPemisah As Integer = 0
 
-            '    For i As Integer = 0 To layoutCode.Length - 1
-            '        If pemisah.Contains(layoutCode(i)) Then
-            '            totalPemisah += 1
-            '            Dim endIndex As Integer = i
-            '            sections.Add(layoutCode.Substring(startIndex, (endIndex - startIndex) + 1))
-            '            startIndex = i
-            '        End If
-            '    Next
+                For i As Integer = 0 To layoutCode.Length - 1
+                    If pemisah.Contains(layoutCode(i)) Then
+                        totalPemisah += 1
+                        Dim endIndex As Integer = i
+                        sections.Add(layoutCode.Substring(startIndex, (endIndex - startIndex) + 1))
+                        startIndex = i
+                    End If
+                Next
 
-            '    If startIndex < layoutCode.Length Then
-            '        sections.Add(layoutCode.Substring(startIndex))
-            '    End If
+                If startIndex < layoutCode.Length Then
+                    sections.Add(layoutCode.Substring(startIndex))
+                End If
 
-            '    If totalPemisah > 0 Then
-            '        For g As Integer = 0 To totalPemisah - 1
-            '            If gaps(g) <= 0 Then
-            '                Return $"GAP {g + 1} IS REQUIRED. PLEASE INPUT A VALID VALUE."
-            '            End If
-            '        Next
+                If totalPemisah > 0 Then
+                    For g As Integer = 0 To totalPemisah - 1
+                        If gaps(g) <= 0 Then
+                            Return String.Format("GAP {0} IS REQUIRED. PLEASE INPUT A VALID VALUE.", g + 1)
+                        End If
+                    Next
 
-            '        For g As Integer = 0 To totalPemisah - 2
-            '            If gaps(g) > gaps(g + 1) Then
-            '                Return $"GAP {g + 1} ({gaps(g)}) CANNOT BE GREATER THAN GAP {g + 2} ({gaps(g + 1)})."
-            '            End If
-            '        Next
+                    For g As Integer = 0 To totalPemisah - 2
+                        If gaps(g) > gaps(g + 1) Then
+                            Return String.Format("GAP {0} ({1}) CANNOT BE GREATER THAN GAP {2} ({3}).", g + 1, gaps(g), g + 2, gaps(g + 1))
+                        End If
+                    Next
 
-            '        Dim sumGapUsed As Integer = 0
+                    Dim sumGapUsed As Integer = 0
 
-            '        For idx As Integer = 0 To sections.Count - 1
-            '            Dim section As String = sections(idx)
+                    For idx As Integer = 0 To sections.Count - 1
+                        Dim section As String = sections(idx)
 
-            '            Dim panelCount As Integer = section.Count(Function(ch) "LRFM".Contains(ch))
+                        Dim panelCount As Integer = section.Count(Function(ch) "LRFM".Contains(ch))
 
-            '            Dim currentGap As Integer
-            '            If idx = sections.Count - 1 Then
-            '                currentGap = totalWidth - sumGapUsed
-            '            Else
-            '                If idx = 0 Then
-            '                    currentGap = gaps(0)
-            '                    sumGapUsed += currentGap
-            '                Else
-            '                    currentGap = gaps(idx) - gaps(idx - 1)
-            '                    sumGapUsed += currentGap
-            '                End If
-            '            End If
+                        Dim currentGap As Integer
+                        If idx = sections.Count - 1 Then
+                            currentGap = totalWidth - sumGapUsed
+                        Else
+                            If idx = 0 Then
+                                currentGap = gaps(0)
+                                sumGapUsed += currentGap
+                            Else
+                                currentGap = gaps(idx) - gaps(idx - 1)
+                                sumGapUsed += currentGap
+                            End If
+                        End If
 
-            '            Dim dataGap As Object() = {
-            '                blindName, "Gap", currentGap, data.mounting,
-            '                section, data.frametype, data.frameleft,
-            '                data.frameright, panelCount
-            '            }
+                        If currentGap <= 0 Then
+                            Return String.Format("GAP 1 IS REQUIRED !", idx + 1)
+                            Exit For
+                        End If
 
-            '            Dim widthDeduct As Decimal = orderCfg.WidthDeductPanorama(dataGap)
+                        Dim dataGap As Object() = {blindName, "Gap", currentGap, data.mounting, section, data.frametype, data.frameleft, data.frameright, panelCount}
 
-            '            If widthDeduct < 200 Then
-            '                Return $"MINIMUM PANEL WIDTH IS 200MM.<br />FINAL PANEL WIDTH IN SECTION {idx + 1} IS {widthDeduct} !"
-            '            End If
-            '            If blindName = "Hinged Bi-fold" AndAlso widthDeduct > 650 Then
-            '                Return $"MAXIMUM PANEL WIDTH FOR HINGED BI-FOLD IS 650MM.<br />FINAL PANEL WIDTH IN SECTION {idx + 1} IS {widthDeduct} !"
-            '            End If
-            '            If widthDeduct > 900 Then
-            '                Return $"MAXIMUM PANEL WIDTH IS 900MM.<br />FINAL PANEL WIDTH IN SECTION {idx + 1} IS {widthDeduct} !"
-            '            End If
-            '        Next
-            '    End If
-            'End If
+                        Dim widthDeduct As Decimal = orderCfg.WidthDeductPanorama(dataGap)
+
+                        If widthDeduct / panelCount < 200 Then
+                            Return String.Format("MINIMUM PANEL WIDTH IS 200MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
+                        End If
+                        If blindName = "Hinged Bi-fold" AndAlso widthDeduct / panelCount > 650 Then
+                            Return String.Format("MAXIMUM PANEL WIDTH FOR HINGED BI-FOLD IS 650MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
+                        End If
+                        If widthDeduct / panelCount > 900 Then
+                            Return String.Format("MAXIMUM PANEL WIDTH IS 900MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
+                        End If
+                    Next
+                End If
+            End If
         End If
 
         If Not String.IsNullOrEmpty(data.notes) Then
@@ -2664,7 +2736,7 @@ Public Class AdditionalData
     Public Property loginid As String
 End Class
 
-Public Class PartData
+Public Class ProcessData
     Public Property headerid As String
     Public Property itemaction As String
     Public Property colourtype As String

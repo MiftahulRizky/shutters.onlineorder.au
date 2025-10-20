@@ -44,13 +44,12 @@ Public Class ExactConfig
     End Function
 
     Public Sub Connect(data As String)
-        Try
-            Dim host As String = "server.sydneyblinds.com.au"
-            Dim port As Integer = 30150
-            Dim username As String = "exact02-user"
-            Dim password As String = "Server$wise4SB12"
+        Dim host As String = "server.sydneyblinds.com.au"
+        Dim port As Integer = 30150
+        Dim username As String = "exact02-user"
+        Dim password As String = "Server$wise4SB12"
 
-            Dim sessionOptions As New SessionOptions With {
+        Dim sessionOptions As New SessionOptions With {
                 .Protocol = Protocol.Ftp,
                 .HostName = host,
                 .UserName = username,
@@ -60,34 +59,32 @@ Public Class ExactConfig
                 .GiveUpSecurityAndAcceptAnyTlsHostCertificate = True
             }
 
-            Using session As New Session()
-                session.Open(sessionOptions)
-                If session.Opened Then
-                    Dim localPath As String = Path.GetTempFileName()
-                    Using webClient As New WebClient()
-                        Try
-                            webClient.DownloadFile(data, localPath)
-                        Catch ex As Exception
-                        End Try
-                    End Using
+        Using session As New Session()
+            session.Open(sessionOptions)
+            If session.Opened Then
+                Dim localPath As String = Path.GetTempFileName()
+                Using webClient As New WebClient()
+                    Try
+                        webClient.DownloadFile(data, localPath)
+                    Catch ex As Exception
+                    End Try
+                End Using
 
-                    Dim remoteFileName As String = Path.GetFileName(New Uri(data).LocalPath)
-                    Dim remotePath As String = "./" & remoteFileName
+                Dim remoteFileName As String = Path.GetFileName(New Uri(data).LocalPath)
+                Dim remotePath As String = "./" & remoteFileName
 
-                    Dim transferOptions As New TransferOptions With {
+                Dim transferOptions As New TransferOptions With {
                         .TransferMode = TransferMode.Binary
                     }
 
-                    Dim transferResult As TransferOperationResult = session.PutFiles(localPath, remotePath, False, transferOptions)
+                Dim transferResult As TransferOperationResult = session.PutFiles(localPath, remotePath, False, transferOptions)
 
-                    Try
-                        If File.Exists(localPath) Then File.Delete(localPath)
-                    Catch ex As Exception
-                    End Try
-                End If
-            End Using
-        Catch ex As Exception
-        End Try
+                Try
+                    If File.Exists(localPath) Then File.Delete(localPath)
+                Catch ex As Exception
+                End Try
+            End If
+        End Using
     End Sub
 
     Public Sub CreateXML(Id As String, fileName As String, folderPath As String)

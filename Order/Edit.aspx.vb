@@ -115,8 +115,7 @@ Partial Class Order_Edit
             If Not Session("RoleName") = "Administrator" Then
                 MessageError(True, "Please contact IT Support at reza@bigblinds.co.id")
                 If Session("RoleName") = "Customer" Then
-                    MessageError(True, "Please contact Customer Service at customerservice@lifestyleshutters.com.au")
-                    'MessageError(True, "Please contact Customer Service at customerservice@sunlight.com.au")
+                    MessageError(True, "Please contact Customer Service at customerservice@sunlight.com.au")
                 End If
                 mailCfg.MailError(Page.Title, "Submit", Session("LoginId"), ex.ToString())
             End If
@@ -267,6 +266,7 @@ Partial Class Order_Edit
             divCreatedDate.Visible = False
             divJobId.Visible = False
             divJobDate.Visible = False
+            divShipmentId.Visible = False
             divShipment.Visible = False
 
             ddlCustomer.Enabled = False
@@ -315,8 +315,7 @@ Partial Class Order_Edit
             If Not Session("RoleName") = "Administrator" Then
                 MessageError(True, "Please contact IT Support at reza@bigblinds.co.id")
                 If Session("RoleName") = "Customer" Then
-                    MessageError(True, "Please contact Customer Service at customerservice@lifestyleshutters.com.au")
-                    'MessageError(True, "Please contact Customer Service at customerservice@sunlight.com.au")
+                    MessageError(True, "Please contact Customer Service at customerservice@sunlight.com.au")
                 End If
                 mailCfg.MailError(Page.Title, "BindDataHeader", Session("LoginId"), ex.ToString())
             End If

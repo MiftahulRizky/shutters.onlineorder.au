@@ -59,7 +59,7 @@ Partial Class Setting_Customer_Edit
                 End If
 
                 Using thisConn As New SqlConnection(myConn)
-                    Using myCmd As SqlCommand = New SqlCommand("UPDATE Customers SET Account=@Account, MasterId=@MasterId, ExactId=@ExactId, Name=@Name, Type='Shutters', [Group]=NULL, Pricing=@PriceGroup, SalesPerson='Office', OnStop=@OnStop, CashSale=@CashSale, Newsletter=@Newsletter, MinimumOrderSurcharge=@MinimumOrderSurcharge WHERE Id=@Id")
+                    Using myCmd As SqlCommand = New SqlCommand("UPDATE Customers SET Account=@Account, MasterId=@MasterId, ExactId=@ExactId, Name=@Name, Type='Shutters', [Group]=NULL, Pricing=@PriceGroup, SalesPerson='Office', OnStop=@OnStop, CashSale=@CashSale, Newsletter=@Newsletter, MinimumOrderSurcharge=@MinimumOrderSurcharge, Active=@Active WHERE Id=@Id")
                         myCmd.Parameters.AddWithValue("@Id", txtId.Text.Trim())
                         myCmd.Parameters.AddWithValue("@Account", ddlAccount.SelectedValue)
                         myCmd.Parameters.AddWithValue("@MasterId", ddlMaster.SelectedValue)
@@ -70,6 +70,7 @@ Partial Class Setting_Customer_Edit
                         myCmd.Parameters.AddWithValue("@CashSale", ddlCashSale.SelectedValue)
                         myCmd.Parameters.AddWithValue("@Newsletter", ddlNewsletter.SelectedValue)
                         myCmd.Parameters.AddWithValue("@MinimumOrderSurcharge", ddlMinimumOrderSurcharge.SelectedValue)
+                        myCmd.Parameters.AddWithValue("@Active", ddlActive.SelectedValue)
 
                         myCmd.Connection = thisConn
                         thisConn.Open()

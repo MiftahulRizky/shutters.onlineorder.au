@@ -220,7 +220,7 @@ Partial Class Setting_Product_Mounting
     Private Sub BindBlindType()
         lbBlindType.Items.Clear()
         Try
-            lbBlindType.DataSource = settingCfg.GetListData("SELECT UPPER(Blinds.Id) AS IdText,Designs.Name + ' | ' + Blinds.Name AS NameText FROM Blinds INNER JOIN Designs ON Blinds.DesignId = Designs.Id WHERE Designs.Type = 'Blinds' OR Designs.Type = 'Shutters' ORDER BY Designs.Name ASC")
+            lbBlindType.DataSource = settingCfg.GetListData("SELECT UPPER(Blinds.Id) AS IdText,Designs.Name + ' | ' + Blinds.Name AS NameText FROM Blinds LEFT JOIN Designs ON Blinds.DesignId = Designs.Id WHERE Designs.Type = 'Panorama' OR Designs.Type = 'Evolve' ORDER BY Designs.Name ASC")
             lbBlindType.DataTextField = "NameText"
             lbBlindType.DataValueField = "IdText"
             lbBlindType.DataBind()

@@ -94,9 +94,9 @@
                                 </div>
 
                                 <div class="mb-2 row">
-                                    <label class="col-lg-3 col-form-label required">ROOM TO INSTALL</label>
+                                    <label class="col-lg-3 col-form-label required">ROOM / LOCATION</label>
                                     <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <input type="text" id="room" class="form-control" autocomplete="off" placeholder="Room to install" />
+                                        <input type="text" id="room" class="form-control" autocomplete="off" placeholder="Room / Location" />
                                     </div>
                                 </div>
 

@@ -166,7 +166,7 @@ Public Class SettingConfig
         Try
             Dim hasil As String = String.Empty
 
-            Dim cekDesign As DataSet = GetListData("SELECT * FROM Designs WHERE Type <> 'Pricing' ORDER BY Name ASC")
+            Dim cekDesign As DataSet = GetListData("SELECT * FROM Designs WHERE Type <> 'Additional' ORDER BY Name ASC")
             If Not cekDesign.Tables(0).Rows.Count = 0 Then
                 For i As Integer = 0 To cekDesign.Tables(0).Rows.Count - 1
                     Dim id As String = cekDesign.Tables(0).Rows(i).Item("Id").ToString()

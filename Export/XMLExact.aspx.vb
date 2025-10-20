@@ -36,7 +36,6 @@ Partial Class Export_XMLExact
 
                 exactCfg.CreateXML(id, fileName, filePath)
                 exactCfg.Connect(finalPath)
-                Threading.Thread.Sleep(3000)
             Next
         End If
 
