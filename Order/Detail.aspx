@@ -1332,6 +1332,7 @@
     </div>
 
     <script type="text/javascript">
+        
         function showWaiting() {
             $("#modalWaiting").modal("show");
         }

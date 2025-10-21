@@ -62,12 +62,11 @@ Partial Class Order_Detail
                 Response.Clear()
                 Dim url As String = "/order/preview"
                 Session("printPreview") = finalFilePath
-
                 Dim sb As New StringBuilder()
                 sb.Append("<script type = 'text/javascript'>")
                 sb.Append("window.open('")
                 sb.Append(url)
-                sb.Append("');")
+                sb.Append("', '_blank');")
                 sb.Append("</script>")
                 ClientScript.RegisterStartupScript(Me.GetType(), "script", sb.ToString())
 
