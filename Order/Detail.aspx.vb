@@ -59,10 +59,18 @@ Partial Class Order_Detail
                 Dim finalFilePath As String = Server.MapPath(filePath & fileName)
                 previewCfg.BindContent(lblHeaderId.Text, finalFilePath)
 
-                Dim documentFile As String = "~/File/Order/" & fileName
-                framePreview.Attributes("src") = "../Handler/PDF.ashx?document=" & documentFile
+                Response.Clear()
+                Dim url As String = "/order/preview"
+                Session("printPreview") = finalFilePath
 
-                ClientScript.RegisterStartupScript(Me.GetType(), "showPreview", thisScript, True)
+                Dim sb As New StringBuilder()
+                sb.Append("<script type = 'text/javascript'>")
+                sb.Append("window.open('")
+                sb.Append(url)
+                sb.Append("');")
+                sb.Append("</script>")
+                ClientScript.RegisterStartupScript(Me.GetType(), "script", sb.ToString())
+
                 Exit Sub
             End If
         Catch ex As Exception
@@ -985,8 +993,17 @@ Partial Class Order_Detail
 
             quoteCfg.BindContentQuote(lblHeaderId.Text, pdfFilePath)
 
+            Response.Clear()
+            Dim url As String = "/order/preview"
             Session("printPreview") = fileDirectory + fileName
-            Response.Redirect("~/order/preview", False)
+
+            Dim sb As New StringBuilder()
+            sb.Append("<script type = 'text/javascript'>")
+            sb.Append("window.open('")
+            sb.Append(url)
+            sb.Append("');")
+            sb.Append("</script>")
+            ClientScript.RegisterStartupScript(Me.GetType(), "script", sb.ToString())
 
         Catch ex As Exception
             MessageError(True, ex.ToString())
