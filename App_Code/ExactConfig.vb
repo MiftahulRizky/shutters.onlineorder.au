@@ -46,8 +46,8 @@ Public Class ExactConfig
     Public Sub Connect(data As String)
         Dim host As String = "server.sydneyblinds.com.au"
         Dim port As Integer = 30150
-        Dim username As String = "exact02-user"
-        Dim password As String = "Server$wise4SB12"
+        Dim username As String = "exact03-user"
+        Dim password As String = "Prussia$rwanda$grapple6#"
 
         Dim sessionOptions As New SessionOptions With {
                 .Protocol = Protocol.Ftp,
