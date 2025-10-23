@@ -311,8 +311,8 @@ function bindComponent(category) {
       "Small Bullnose Sill Plate",
       "Large Bullnose Sill Plate",
       "Colonial Bullnose Sill Plate",
-      "Top U Channel",
-      "Bottom U Channel",
+      // "Top U Channel",
+      // "Bottom U Channel",
     ],
     "Framing | Bi-fold or Sliding": [
       "101.6mm x 19mm Header",
@@ -338,6 +338,7 @@ function bindComponent(category) {
       "90° Corner Post",
       "135° Bay Post",
       "Post Mounting Bracket",
+      "L Strip",
     ],
     Extrusion: [
       "19mm x 19mm Light Block",
@@ -391,7 +392,7 @@ function bindColour(category, component) {
     { value: "Off White", text: "OFF WHITE" },
     { value: "Snow White", text: "SNOW WHITE" },
     { value: "Bright White", text: "BRIGHT WHITE" },
-    { value: "Alabaster", text: "ALABASTER" },
+    // { value: "Alabaster", text: "ALABASTER" },
     { value: "Classic White", text: "WHITE" },
   ];
 
