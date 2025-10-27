@@ -186,6 +186,75 @@ Public Class ShuttersPreviewConfig
             End Try
             ' END PANORAMA PVC PARTS
 
+            ' START EVOLVE PARTS
+            Try
+                Dim evolvePartsData As DataSet = GetListData("SELECT OrderDetails.* FROM OrderDetails LEFT JOIN Products ON OrderDetails.ProductId = Products.Id LEFT JOIN Designs ON Products.DesignId = Designs.Id WHERE OrderDetails.HeaderId = '" + Id + "' AND Designs.Name = 'Evolve Parts' AND OrderDetails.Active = 1 ORDER BY OrderDetails.Number ASC")
+                If Not evolvePartsData.Tables(0).Rows.Count = 0 Then
+                    pageEvent.PageTitle = "EVOLVE PARTS"
+                    Dim table As New PdfPTable(5)
+                    table.WidthPercentage = 100
+
+                    Dim dt As DataTable = evolvePartsData.Tables(0)
+                    Dim items(7, dt.Rows.Count - 1) As String
+
+                    For i As Integer = 0 To dt.Rows.Count - 1
+                        Dim number As Integer = i + 1
+
+                        Dim length As String = String.Empty
+                        If dt.Rows(i)("PartLength") > 0 Then
+                            length = dt.Rows(i)("PartLength").ToString()
+                        End If
+
+                        items(0, i) = "Item : " & number
+                        items(1, i) = dt.Rows(i)("Qty").ToString()
+                        items(2, i) = dt.Rows(i)("PartCategory").ToString()
+                        items(3, i) = dt.Rows(i)("PartComponent").ToString()
+                        items(4, i) = dt.Rows(i)("PartColour").ToString()
+                        items(5, i) = length
+                        items(6, i) = dt.Rows(i)("Notes").ToString()
+                    Next
+
+                    For i As Integer = 0 To items.GetLength(1) - 1 Step 4
+                        If i > 0 Then doc.NewPage()
+
+                        Dim fontHeader As New Font(Font.FontFamily.TIMES_ROMAN, 9, Font.BOLD)
+                        Dim fontContent As New Font(Font.FontFamily.TIMES_ROMAN, 9)
+
+                        Dim headers As String() = {"", "Qty", "Category", "Component", "Colour", "Length", "Notes"}
+
+                        For row As Integer = 0 To headers.Length - 1
+                            Dim cellHeader As New PdfPCell(New Phrase(headers(row), fontHeader))
+                            cellHeader.HorizontalAlignment = Element.ALIGN_RIGHT
+                            cellHeader.VerticalAlignment = Element.ALIGN_MIDDLE
+                            cellHeader.BackgroundColor = New BaseColor(200, 200, 200)
+                            cellHeader.MinimumHeight = 22
+                            table.AddCell(cellHeader)
+
+                            For col As Integer = i To Math.Min(i + 3, items.GetLength(1) - 1)
+                                Dim cellContent As New PdfPCell(New Phrase(items(row, col), fontContent))
+                                cellContent.HorizontalAlignment = Element.ALIGN_CENTER
+                                cellContent.VerticalAlignment = Element.ALIGN_MIDDLE
+                                cellContent.MinimumHeight = 22
+                                table.AddCell(cellContent)
+                            Next
+
+                            For col As Integer = items.GetLength(1) To i + 3
+                                Dim emptyCell As New PdfPCell(New Phrase("", fontContent))
+                                emptyCell.HorizontalAlignment = Element.ALIGN_CENTER
+                                emptyCell.VerticalAlignment = Element.ALIGN_MIDDLE
+                                emptyCell.MinimumHeight = 22
+                                table.AddCell(emptyCell)
+                            Next
+                        Next
+                        doc.Add(table)
+                        table.DeleteBodyRows()
+                        doc.NewPage()
+                    Next
+                End If
+            Catch ex As Exception
+            End Try
+            ' END EVOLVE PARTS
+
             ' START PANORAMA PVC SHUTTERS
             Try
                 Dim panoramaData As DataSet = GetListData("SELECT OrderDetails.*, Products.ColourType AS ColourType, Blinds.Name AS BlindName FROM OrderDetails LEFT JOIN Products ON OrderDetails.ProductId = Products.Id LEFT JOIN Designs ON Products.DesignId = Designs.Id LEFT JOIN Blinds ON Products.BlindId = Blinds.Id WHERE OrderDetails.HeaderId = '" + Id + "' AND Designs.Name = 'Panorama PVC Shutters' AND OrderDetails.Active = 1 ORDER BY OrderDetails.Number ASC")
