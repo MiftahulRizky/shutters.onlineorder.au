@@ -618,13 +618,13 @@ Partial Class Order_Method
                             Dim widthDeduct As Decimal = orderCfg.WidthDeductEvolve(dataGap)
 
                             ' 🔹 VALIDASI PANEL WIDTH
-                            If widthDeduct < 200 Then
+                            If widthDeduct / panelCount < 200 Then
                                 Return String.Format("MINIMUM PANEL WIDTH IS 200MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
                             End If
-                            If blindName = "Hinged Bi-fold" AndAlso widthDeduct > 650 Then
+                            If blindName = "Hinged Bi-fold" AndAlso widthDeduct / panelCount > 650 Then
                                 Return String.Format("MAXIMUM PANEL WIDTH FOR HINGED BI-FOLD IS 650MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
                             End If
-                            If widthDeduct > 900 Then
+                            If widthDeduct / panelCount > 900 Then
                                 Return String.Format("MAXIMUM PANEL WIDTH IS 900MM.<br />FINAL PANEL WIDTH IN SECTION {0} IS {1} !", idx + 1, widthDeduct)
                             End If
                         Next
