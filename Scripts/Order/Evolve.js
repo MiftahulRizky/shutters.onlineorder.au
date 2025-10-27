@@ -962,16 +962,16 @@ function bindTiltrodSplit(height1) {
                 { value: "", text: "" },
                 { value: "None", text: "NONE" },
                 { value: "Split Halfway", text: "SPLIT HALFWAY" },
-                { value: "Split Halfway Above Midrail", text: "SPLIT HALFWAY ABOVE MIDRAIL" },
-                { value: "Split Halfway Below Midrail", text: "SPLIT HALFWAY BELOW MIDRAIL" },
-                { value: "Split Halfway Above and Below Midrail", text: "SPLIT HALFWAY ABOVE & BELOW MIDRAIL" },
-                { value: "Other", text: "OTHER" }
+                { value: "Other", text: "OTHER" },
             ];
         } else if (thisValue > 0) {
             options = [
                 { value: "", text: "" },
                 { value: "None", text: "NONE" },
-                { value: "Other", text: "OTHER" }
+                { value: "Split Halfway Above Midrail", text: "SPLIT HALFWAY ABOVE MIDRAIL" },
+                { value: "Split Halfway Below Midrail", text: "SPLIT HALFWAY BELOW MIDRAIL" },
+                { value: "Split Halfway Above and Below Midrail", text: "SPLIT HALFWAY ABOVE & BELOW MIDRAIL" },
+                { value: "Other", text: "OTHER" },
             ];
         }
 
