@@ -322,7 +322,7 @@ Partial Class Order_Method
         If Not Integer.TryParse(data.qty, qty) OrElse qty <= 0 Then Return "PLEASE CHECK YOUR QTY ORDER !"
         If qty > 5 Then Return "MAXIMUM QTY ORDER IS 5 !"
 
-        If String.IsNullOrEmpty(data.room) Then Return "ROOM TO INSTALL IS REQUIRED !"
+        If String.IsNullOrEmpty(data.room) Then Return "ROOM / LOCATION IS REQUIRED !"
         If String.IsNullOrEmpty(data.mounting) Then Return "MOUNTING IS REQUIRED !"
 
         If String.IsNullOrEmpty(data.width) Then Return "WIDTH IS REQUIRED !"
@@ -333,10 +333,8 @@ Partial Class Order_Method
 
         If String.IsNullOrEmpty(data.louvresize) Then Return "LOUVRE SIZE IS REQUIRED !"
 
-        If blindName = "Track Sliding" Or blindName = "Track Sliding Single Track" Then
-            If data.louvreposition = "" Then
-                Return "LOUVRE POSITION IS REQUIRED !"
-            End If
+        If blindName = "Track Sliding" Then
+            If data.louvreposition = "" Then Return "LOUVRE POSITION IS REQUIRED !"
         End If
 
         If Not String.IsNullOrEmpty(data.midrailheight1) Then
@@ -356,32 +354,32 @@ Partial Class Order_Method
                 Return "MIDRAIL HEIGHT IS REQUIRED. <br /> MAXIMUM ONE SECTION IS 1500MM !"
             End If
         End If
-        If midrailHeight1 > 0 And midrailHeight2 = 0 Then
-            If midrailHeight1 > 1500 Then
-                Return "MAXIMUM MIDRAIL HEIGHT 1 IS 1500MM !"
-            End If
-            If drop - midrailHeight1 > 1500 Then
-                Return "MAXIMUM MIDRAIL HEIGHT FOR OTHER SECTIONS IS 1500mm !"
-            End If
-        End If
-        If midrailHeight1 > 0 And midrailHeight2 > 0 Then
-            If midrailHeight1 = midrailHeight2 Then
-                Return "MIDRAIL HEIGHT IS IN THE SAME POSITION. PLEASE CHANGE MIDRAIL HEIGHT POSITION 2"
-            End If
-            If midrailHeight1 > midrailHeight2 Then
-                Return "THE HEIGHT OF MIDRAIL 1 SHOULD NOT BE GREATER THAN THE HEIGHT OF MIDRAIL 2 !"
-            End If
+        ' If midrailHeight1 > 0 And midrailHeight2 = 0 Then
+        '     If midrailHeight1 > 1500 Then
+        '         Return "MAXIMUM MIDRAIL HEIGHT 1 IS 1500MM !"
+        '     End If
+        '     If drop - midrailHeight1 > 1500 Then
+        '         Return "MAXIMUM MIDRAIL HEIGHT FOR OTHER SECTIONS IS 1500mm !"
+        '     End If
+        ' End If
+        ' If midrailHeight1 > 0 And midrailHeight2 > 0 Then
+        '     If midrailHeight1 = midrailHeight2 Then
+        '         Return "MIDRAIL HEIGHT IS IN THE SAME POSITION. PLEASE CHANGE MIDRAIL HEIGHT POSITION 2"
+        '     End If
+        '     If midrailHeight1 > midrailHeight2 Then
+        '         Return "THE HEIGHT OF MIDRAIL 1 SHOULD NOT BE GREATER THAN THE HEIGHT OF MIDRAIL 2 !"
+        '     End If
 
-            If midrailHeight1 > 1500 Then
-                Return "MAXIMUM ONE SECTION IS 1500MM "
-            End If
-            If midrailHeight2 - midrailHeight1 > 1500 Then
-                Return "MAXIMUM ONE SECTION IS 1500MM !"
-            End If
-            If drop - midrailHeight2 > 1500 Then
-                Return "MAXIMUM ONE SECTION IS 1500mm !"
-            End If
-        End If
+        '     If midrailHeight1 > 1500 Then
+        '         Return "MAXIMUM ONE SECTION IS 1500MM "
+        '     End If
+        '     If midrailHeight2 - midrailHeight1 > 1500 Then
+        '         Return "MAXIMUM ONE SECTION IS 1500MM !"
+        '     End If
+        '     If drop - midrailHeight2 > 1500 Then
+        '         Return "MAXIMUM ONE SECTION IS 1500mm !"
+        '     End If
+        ' End If
 
         If blindName = "Hinged" Or blindName = "Hinged Bi-fold" Or blindName = "Track Bi-fold" Then
             If String.IsNullOrEmpty(data.hingecolour) Then Return "HINGE COLOUR IS REQUIRED !"
@@ -515,7 +513,7 @@ Partial Class Order_Method
                 If width > 914 Then Return "MAXIMUM PANEL WIDTH IS 914mm !"
 
                 If drop < 250 Then Return "MINIMUM PANEL HEIGHT IS 250MM !"
-                If drop > 2500 Then Return "MAXIMUM PANEL HEIGHT IS 3000MM !"
+                If drop > 2500 Then Return "MAXIMUM PANEL HEIGHT IS 2500MM !"
             End If
 
             If blindName = "Hinged" Or blindName = "Fixed" Or blindName = "Track Sliding" Then
@@ -542,8 +540,6 @@ Partial Class Order_Method
                 If panelHeight < 250 Then Return "MINIMUM PANEL HEIGHT IS 250MM !"
                 If panelHeight > 3000 Then Return "MAXIMUM PANEL HEIGHT IS 3000MM !"
             End If
-
-
         End If
 
         'GAP POSITION
@@ -1361,7 +1357,7 @@ Partial Class Order_Method
         If qty > 5 Then Return "MAXIMUM QTY ORDER IS 5 !"
 
         If String.IsNullOrEmpty(data.room) OrElse data.room.IndexOfAny({","c, "&"c, "`"c, "'"c}) >= 0 OrElse data.room.Contains("&=") OrElse data.room.Contains("&+") Then
-            Return "ROOM TO INSTALL IS REQUIRED AND MUST NOT CONTAIN: , & ` ' &= &+"
+            Return "ROOM / LOCATION IS REQUIRED AND MUST NOT CONTAIN: , & ` ' &= &+"
         End If
         If String.IsNullOrEmpty(data.mounting) Then Return "MOUNTING IS REQUIRED !"
 
