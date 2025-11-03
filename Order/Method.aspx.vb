@@ -513,7 +513,7 @@ Partial Class Order_Method
                 If width > 914 Then Return "MAXIMUM PANEL WIDTH IS 914mm !"
 
                 If drop < 250 Then Return "MINIMUM PANEL HEIGHT IS 250MM !"
-                If drop > 2500 Then Return "MAXIMUM PANEL HEIGHT IS 2500MM !"
+                If drop > 3000 Then Return "MAXIMUM PANEL HEIGHT IS 3000MM !"
             End If
 
             If blindName = "Hinged" Or blindName = "Fixed" Or blindName = "Track Sliding" Then
