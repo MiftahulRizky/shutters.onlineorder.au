@@ -586,8 +586,8 @@ Public Class ShuttersPreviewEvents
 
         Dim noteTable As New PdfPTable(1)
         noteTable.HorizontalAlignment = Element.ALIGN_LEFT
-        noteTable.SpacingBefore = 3
-        noteTable.SpacingAfter = 0
+        noteTable.SpacingBefore = 2
+        noteTable.SpacingAfter = 2
         noteTable.TotalWidth = 130
         noteTable.LockedWidth = True
 
