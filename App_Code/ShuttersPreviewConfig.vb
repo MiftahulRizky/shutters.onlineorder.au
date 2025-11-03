@@ -96,7 +96,7 @@ Public Class ShuttersPreviewConfig
                 End If
             End If
 
-            Dim totalItems As Integer = GetItemData("SELECT SUM(TotalBlinds) FROM OrderDetails WHERE HeaderId = '" + Id + "' AND Active = 1")
+            Dim totalItems As Integer = GetItemData("SELECT COUNT(*) FROM OrderDetails WHERE HeaderId = '" + Id + "' AND Active = 1")
 
             Dim doc As New Document(PageSize.A4, 20, 20, 130, 50)
             Dim writer As PdfWriter = PdfWriter.GetInstance(doc, fs)
