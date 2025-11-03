@@ -578,14 +578,37 @@ Public Class ShuttersPreviewEvents
             phraseFirst.Add(New Chunk(PageTitle2, New Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD)))
         End If
 
-        Dim firstHeaderCell As New PdfPCell(phraseFirst)
+        phraseFirst.Add(New Chunk(Environment.NewLine))
+
+        Dim fontNote As New Font(Font.FontFamily.TIMES_ROMAN, 8)
+
+        Dim noteText As String = "Order Note : " & PageNote
+
+        Dim noteTable As New PdfPTable(1)
+        noteTable.HorizontalAlignment = Element.ALIGN_LEFT
+        noteTable.SpacingBefore = 3
+        noteTable.SpacingAfter = 0
+        noteTable.TotalWidth = 130
+        noteTable.LockedWidth = True
+
+        Dim noteCell As New PdfPCell(New Phrase(noteText, fontNote))
+        noteCell.Border = Rectangle.BOX
+        noteCell.BorderWidth = 0.2F
+        noteCell.HorizontalAlignment = Element.ALIGN_LEFT
+
+        noteTable.AddCell(noteCell)
+
+        Dim firstHeaderCell As New PdfPCell()
         firstHeaderCell.Border = 0
         firstHeaderCell.HorizontalAlignment = Element.ALIGN_LEFT
         firstHeaderCell.VerticalAlignment = Element.ALIGN_TOP
+        firstHeaderCell.AddElement(phraseFirst)
+        firstHeaderCell.AddElement(noteTable)
+
         headerTable.AddCell(firstHeaderCell)
 
-        Dim labels As String() = {"Order No", "Created Date", "Submitted Date", "Retailer", "Retailer Order No", "Customer Name", "Note", "Total Item Order"}
-        Dim values As String() = {PageOrderId, PageOrderDate.ToString("dd MMM yyyy"), PageSubmitDate.ToString("dd MMM yyyy"), PageCustomerName, PageOrderNumber, PageOrderName, PageNote, PageTotalItem}
+        Dim labels As String() = {"Order No", "Created Date", "Submitted Date", "Retailer", "Retailer Order No", "Customer Name", "Total Item Order"}
+        Dim values As String() = {PageOrderId, PageOrderDate.ToString("dd MMM yyyy"), PageSubmitDate.ToString("dd MMM yyyy"), PageCustomerName, PageOrderNumber, PageOrderName, PageTotalItem}
 
         For i As Integer = 0 To labels.Length - 1
             nestedTable.AddCell(New PdfPCell(New Phrase(labels(i), New Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD))) With {
