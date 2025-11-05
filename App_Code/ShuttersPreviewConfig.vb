@@ -407,7 +407,7 @@ Public Class ShuttersPreviewConfig
                     table.WidthPercentage = 100
 
                     Dim dt As DataTable = evolveData.Tables(0)
-                    Dim items(36, dt.Rows.Count - 1) As String
+                    Dim items(37, dt.Rows.Count - 1) As String
 
                     For i As Integer = 0 To dt.Rows.Count - 1
                         Dim layoutCode As String = If(dt.Rows(i)("Layout").ToString() = "Other", dt.Rows(i)("LayoutSpecial").ToString(), dt.Rows(i)("Layout").ToString())
@@ -442,6 +442,11 @@ Public Class ShuttersPreviewConfig
                         Dim split2 As Integer = dt.Rows(i)("SplitHeight2")
                         Dim splitHeigth As String = "Height 1 : " & split1 & ", " & "Height 2 : " & split2
 
+                        Dim bottomTrack As String = dt.Rows(i)("BottomTrackType").ToString()
+                        If dt.Rows(i)("BottomTrackRecess").ToString() = "Yes" Then
+                            bottomTrack = dt.Rows(i)("BottomTrackType").ToString() & " | Recess: Yes"
+                        End If
+
                         Dim customHeaderLength As String = dt.Rows(i)("CustomHeaderLength").ToString()
                         If customHeaderLength = "" Or customHeaderLength = "0" Then customHeaderLength = String.Empty
 
@@ -469,20 +474,21 @@ Public Class ShuttersPreviewConfig
                         items(19, i) = dt.Rows(i)("FrameRight").ToString()
                         items(20, i) = dt.Rows(i)("FrameTop").ToString()
                         items(21, i) = dt.Rows(i)("FrameBottom").ToString()
-                        items(22, i) = dt.Rows(i)("Buildout").ToString()
-                        items(23, i) = dt.Rows(i)("PanelSize").ToString()
-                        items(24, i) = gapPosition
-                        items(25, i) = dt.Rows(i)("HorizontalTPostHeight").ToString()
-                        items(26, i) = dt.Rows(i)("HorizontalTPost").ToString()
-                        items(27, i) = dt.Rows(i)("TiltrodType").ToString()
-                        items(28, i) = dt.Rows(i)("TiltrodSplit").ToString()
-                        items(29, i) = splitHeigth
-                        items(30, i) = dt.Rows(i)("ReverseHinged").ToString()
-                        items(31, i) = dt.Rows(i)("PelmetFlat").ToString()
-                        items(32, i) = dt.Rows(i)("ExtraFascia").ToString()
-                        items(33, i) = dt.Rows(i)("HingesLoose").ToString()
-                        items(34, i) = FormatNumber(dt.Rows(i)("SquareMetre"), 2)
-                        items(35, i) = dt.Rows(i)("Notes").ToString()
+                        items(22, i) = bottomTrack
+                        items(23, i) = dt.Rows(i)("Buildout").ToString()
+                        items(24, i) = dt.Rows(i)("PanelSize").ToString()
+                        items(25, i) = gapPosition
+                        items(26, i) = dt.Rows(i)("HorizontalTPostHeight").ToString()
+                        items(27, i) = dt.Rows(i)("HorizontalTPost").ToString()
+                        items(28, i) = dt.Rows(i)("TiltrodType").ToString()
+                        items(29, i) = dt.Rows(i)("TiltrodSplit").ToString()
+                        items(30, i) = splitHeigth
+                        items(31, i) = dt.Rows(i)("ReverseHinged").ToString()
+                        items(32, i) = dt.Rows(i)("PelmetFlat").ToString()
+                        items(33, i) = dt.Rows(i)("ExtraFascia").ToString()
+                        items(34, i) = dt.Rows(i)("HingesLoose").ToString()
+                        items(35, i) = FormatNumber(dt.Rows(i)("SquareMetre"), 2)
+                        items(36, i) = dt.Rows(i)("Notes").ToString()
                     Next
 
                     For i As Integer = 0 To items.GetLength(1) - 1 Step 4
@@ -491,7 +497,7 @@ Public Class ShuttersPreviewConfig
                         Dim fontHeader As New Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD)
                         Dim fontContent As New Font(Font.FontFamily.TIMES_ROMAN, 8)
 
-                        Dim headers As String() = {"", "Location", "Width (mm)", "Height (mm)", "Mounting", "Semi Inside Mount", "Colour", "Louvre Size", "Sliding Louvre Position", "Midrail Height (mm)", "Critical Midrail", "Hinge Colour", "Installation Method", "Panel Qty", "Custom Header Length (mm)", "Co-joined Panels", "Layout Code", "Frame Type", "Left Frame", "Right Frame", "Top Frame", "Bottom Frame", "Buildout", "Same Size Panel", "Gap / T-Post (mm)", "Hor T-Post Height (mm)", "Hor T-Post Required", "Tiltrod Type", "Split Tiltrod", "Split Height (mm)", "Reverse Hinged", "Pelmet Flat Packed", "Extra Fascia", "Hinges Loose", "M2", "Notes"}
+                        Dim headers As String() = {"", "Location", "Width (mm)", "Height (mm)", "Mounting", "Semi Inside Mount", "Colour", "Louvre Size", "Sliding Louvre Position", "Midrail Height (mm)", "Critical Midrail", "Hinge Colour", "Installation Method", "Panel Qty", "Custom Header Length (mm)", "Co-joined Panels", "Layout Code", "Frame Type", "Left Frame", "Right Frame", "Top Frame", "Bottom Frame", "Bottom Track", "Buildout", "Same Size Panel", "Gap / T-Post (mm)", "Hor T-Post Height (mm)", "Hor T-Post Required", "Tiltrod Type", "Split Tiltrod", "Split Height (mm)", "Reverse Hinged", "Pelmet Flat Packed", "Extra Fascia", "Hinges Loose", "M2", "Notes"}
 
                         For row As Integer = 0 To headers.Length - 1
                             Dim cellHeader As New PdfPCell(New Phrase(headers(row), fontHeader))
