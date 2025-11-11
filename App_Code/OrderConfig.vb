@@ -3122,7 +3122,6 @@ Public Class OrderConfig
 
             If frameType = "Beaded L 49mm" Then frameDeduction = 22.5
             If frameType = "Insert L 49mm" Then frameDeduction = 22.5
-            If frameType = "No Frame" Then frameDeduction = 22.5
             If frameType = "Small Bullnose Z Frame" Then frameDeduction = 22.5
             If frameType = "Large Bullnose Z Frame" Then frameDeduction = 22.5
 
