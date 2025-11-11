@@ -2028,6 +2028,15 @@ Partial Class Order_Method
             End If
         End If
 
+        If customerPriceGroup = "B" Then
+            If blindName = "Hinged Bi-fold" Or blindName = "Track Bi-fold" Then
+                productpriceGroupName = "Panorama B - Bi-fold"
+            End If
+            If blindName = "Track Sliding" Or blindName = "Track Sliding Single Track" Then
+                productpriceGroupName = "Panorama B - Sliding"
+            End If
+        End If
+
         Dim productpriceGroupId As String = orderCfg.GetProductPriceGroupId(data.designid, productpriceGroupName)
 
         Dim squareMetre As Decimal = Math.Round(width * drop / 1000000, 4)
