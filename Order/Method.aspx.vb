@@ -343,7 +343,7 @@ Partial Class Order_Method
         If Not String.IsNullOrEmpty(data.midrailheight2) Then
             If Not Integer.TryParse(data.midrailheight2, midrailHeight2) OrElse midrailHeight2 < 0 Then Return "PLEASE CHECK YOUR MIDRAIL HEIGHT 2 ORDER !"
         End If
-        
+
         If drop > 1500 AndAlso midrailHeight1 = 0 Then
             Return "MIDRAIL HEIGHT IS REQUIRED. <br /> MAXIMUM ONE SECTION IS 1500MM !"
         End If
@@ -424,13 +424,13 @@ Partial Class Order_Method
 
             Dim heightDeduct As Decimal = orderCfg.HeightDeductEvolve(dataGap)
             If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
-            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
 
             dataGap = {blindName, section2, data.mounting, data.frametype, data.frametop, data.framebottom, "Top"}
             heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
 
             If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
-            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
         End If
 
         If midrailSection = 3 Then
@@ -442,19 +442,19 @@ Partial Class Order_Method
 
             Dim heightDeduct As Decimal = orderCfg.HeightDeductEvolve(dataGap)
             If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
-            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
 
             dataGap = {blindName, section2, data.mounting, data.frametype, data.frametop, data.framebottom, ""}
             heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
 
             If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
-            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
 
             dataGap = {blindName, section3, data.mounting, data.frametype, data.frametop, data.framebottom, "Top"}
             heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
 
             If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
-            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
         End If
 
         If data.frametype = "Insert L 49mm" And (blindName = "Hinged" Or blindName = "Hinged Bi-fold") Then
