@@ -343,43 +343,10 @@ Partial Class Order_Method
         If Not String.IsNullOrEmpty(data.midrailheight2) Then
             If Not Integer.TryParse(data.midrailheight2, midrailHeight2) OrElse midrailHeight2 < 0 Then Return "PLEASE CHECK YOUR MIDRAIL HEIGHT 2 ORDER !"
         End If
-        If midrailHeight1 >= drop Then
-            Return "THE HEIGHT OF MIDRAIL 1 SHOULD NOT BE EQUAL TO OR MORE THAN YOUR ORDER HEIGHT"
+        
+        If drop > 1500 AndAlso midrailHeight1 = 0 Then
+            Return "MIDRAIL HEIGHT IS REQUIRED. <br /> MAXIMUM ONE SECTION IS 1500MM !"
         End If
-        If midrailHeight2 >= drop Then
-            Return "THE HEIGHT OF MIDRAIL 2 SHOULD NOT BE EQUAL TO OR MORE THAN YOUR ORDER HEIGHT"
-        End If
-        If drop > 1500 Then
-            If midrailHeight1 = 0 Then
-                Return "MIDRAIL HEIGHT IS REQUIRED. <br /> MAXIMUM ONE SECTION IS 1500MM !"
-            End If
-        End If
-        ' If midrailHeight1 > 0 And midrailHeight2 = 0 Then
-        '     If midrailHeight1 > 1500 Then
-        '         Return "MAXIMUM MIDRAIL HEIGHT 1 IS 1500MM !"
-        '     End If
-        '     If drop - midrailHeight1 > 1500 Then
-        '         Return "MAXIMUM MIDRAIL HEIGHT FOR OTHER SECTIONS IS 1500mm !"
-        '     End If
-        ' End If
-        ' If midrailHeight1 > 0 And midrailHeight2 > 0 Then
-        '     If midrailHeight1 = midrailHeight2 Then
-        '         Return "MIDRAIL HEIGHT IS IN THE SAME POSITION. PLEASE CHANGE MIDRAIL HEIGHT POSITION 2"
-        '     End If
-        '     If midrailHeight1 > midrailHeight2 Then
-        '         Return "THE HEIGHT OF MIDRAIL 1 SHOULD NOT BE GREATER THAN THE HEIGHT OF MIDRAIL 2 !"
-        '     End If
-
-        '     If midrailHeight1 > 1500 Then
-        '         Return "MAXIMUM ONE SECTION IS 1500MM "
-        '     End If
-        '     If midrailHeight2 - midrailHeight1 > 1500 Then
-        '         Return "MAXIMUM ONE SECTION IS 1500MM !"
-        '     End If
-        '     If drop - midrailHeight2 > 1500 Then
-        '         Return "MAXIMUM ONE SECTION IS 1500mm !"
-        '     End If
-        ' End If
 
         If blindName = "Hinged" Or blindName = "Hinged Bi-fold" Or blindName = "Track Bi-fold" Then
             If String.IsNullOrEmpty(data.hingecolour) Then Return "HINGE COLOUR IS REQUIRED !"
@@ -443,6 +410,51 @@ Partial Class Order_Method
             If String.IsNullOrEmpty(data.frameright) Then Return "RIGHT FRAME IS REQUIRED !"
             If String.IsNullOrEmpty(data.frametop) Then Return "TOP FRAME IS REQUIRED !"
             If String.IsNullOrEmpty(data.framebottom) Then Return "BOTTOM FRAME IS REQUIRED !"
+        End If
+
+        Dim midrailSection As Integer = 0
+        If midrailHeight1 > 0 Then midrailSection = 2
+        If midrailHeight2 > 0 Then midrailSection = 3
+
+        If midrailSection = 2 Then
+            Dim section1 As Decimal = midrailHeight1
+            Dim section2 As Decimal = drop - midrailHeight1
+
+            Dim dataGap As Object() = {blindName, section1, data.mounting, data.frametype, data.frametop, data.framebottom, "Bottom"}
+
+            Dim heightDeduct As Decimal = orderCfg.HeightDeductEvolve(dataGap)
+            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+
+            dataGap = {blindName, section2, data.mounting, data.frametype, data.frametop, data.framebottom, "Top"}
+            heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
+
+            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+        End If
+
+        If midrailSection = 3 Then
+            Dim section1 As Decimal = midrailHeight1
+            Dim section2 As Decimal = midrailHeight2 - midrailHeight1
+            Dim section3 As Decimal = drop - midrailHeight2
+
+            Dim dataGap As Object() = {blindName, section1, data.mounting, data.frametype, data.frametop, data.framebottom, "Bottom"}
+
+            Dim heightDeduct As Decimal = orderCfg.HeightDeductEvolve(dataGap)
+            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+
+            dataGap = {blindName, section2, data.mounting, data.frametype, data.frametop, data.framebottom, ""}
+            heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
+
+            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
+
+            dataGap = {blindName, section3, data.mounting, data.frametype, data.frametop, data.framebottom, "Top"}
+            heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
+
+            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
+            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 3000MM !"
         End If
 
         If data.frametype = "Insert L 49mm" And (blindName = "Hinged" Or blindName = "Hinged Bi-fold") Then
