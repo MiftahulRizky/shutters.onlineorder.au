@@ -1300,7 +1300,6 @@ function bindComponentForm(blindType, colourType) {
                 divHingeColour.style.display = "";
                 divTiltrodType.style.display = "";
                 divTiltrodSplit.style.display = "";
-                divCutOut.style.display = "";
                 divSpecialShape.style.display = "";
                 divLayoutCode.style.display = "";
                 divFrameType.style.display = "";
