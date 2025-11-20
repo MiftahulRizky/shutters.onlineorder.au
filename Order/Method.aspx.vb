@@ -447,8 +447,8 @@ Partial Class Order_Method
             dataGap = {blindName, section2, data.mounting, data.frametype, data.frametop, data.framebottom, ""}
             heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
 
-            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
-            If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
+            If heightDeduct > 1473 And data.louvresize = "63" Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 1473MM !"
+            If heightDeduct > 1448 And data.louvresize = "89" Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 1448MM !"
 
             dataGap = {blindName, section3, data.mounting, data.frametype, data.frametop, data.framebottom, "Top"}
             heightDeduct = orderCfg.HeightDeductEvolve(dataGap)
