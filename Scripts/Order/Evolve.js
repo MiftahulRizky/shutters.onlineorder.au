@@ -725,7 +725,8 @@ function bindLeftFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                //{ value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
             ];
         } else if (frameType === "No Frame") {
             options = [{ value: "Light Block", text: "LIGHT BLOCK" }];
@@ -776,7 +777,8 @@ function bindRightFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                //{ value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
             ];
         } else if (frameType === "No Frame") {
             options = [{ value: "Light Block", text: "LIGHT BLOCK" }];
@@ -827,7 +829,8 @@ function bindTopFrame(frameType, mounting) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                //{ value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "Roller Catch Ramp", text: "ROLLER CATCH RAMP" }
             ];
         } else if (frameType === "No Frame") {
@@ -885,7 +888,8 @@ function bindBottomFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                //{ value: "Bullnose Z Sill Plate", text: "BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "Roller Catch Ramp", text: "ROLLER CATCH RAMP" }
             ];
         } else if (frameType === "No Frame") {
