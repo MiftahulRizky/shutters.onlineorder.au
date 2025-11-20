@@ -833,26 +833,10 @@ function bindLeftFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
-            ];
-        } else if (frameType === "Large Bullnose Z Frame") {
-            options = [
-                { value: "", text: "" },
-                { value: "Yes", text: "YES" },
-                { value: "No", text: "NO" },
-                { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Large Bullnose Z Sill Plate", text: "LARGE BULLNOSE Z SILL PLATE" },
-            ];
-        } else if (frameType === "Colonial Z Frame") {
-            options = [
-                { value: "", text: "" },
-                { value: "Yes", text: "YES" },
-                { value: "No", text: "NO" },
-                { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Colonial Z Sill Plate", text: "COLONIAL Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
             ];
         } else if (frameType === "No Frame") {
             options = [{ value: "Light Block", text: "LIGHT BLOCK" }];
@@ -906,26 +890,10 @@ function bindRightFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
-            ];
-        } else if (frameType === "Large Bullnose Z Frame") {
-            options = [
-                { value: "", text: "" },
-                { value: "Yes", text: "YES" },
-                { value: "No", text: "NO" },
-                { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Large Bullnose Z Sill Plate", text: "LARGE BULLNOSE Z SILL PLATE" },
-            ];
-        } else if (frameType === "Colonial Z Frame") {
-            options = [
-                { value: "", text: "" },
-                { value: "Yes", text: "YES" },
-                { value: "No", text: "NO" },
-                { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Colonial Z Sill Plate", text: "COLONIAL Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
             ];
         } else if (frameType === "No Frame") {
             options = [{ value: "Light Block", text: "LIGHT BLOCK" }];
@@ -992,8 +960,10 @@ function bindTopFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "L Striker Plate", text: "L STRIKER PLATE" }
             ];
         } else if (frameType === "Large Bullnose Z Frame") {
@@ -1002,8 +972,10 @@ function bindTopFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Large Bullnose Z Sill Plate", text: "LARGE BULLNOSE Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "L Striker Plate", text: "L STRIKER PLATE" }
             ];
         } else if (frameType === "Colonial Z Frame") {
@@ -1012,8 +984,10 @@ function bindTopFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Colonial Z Sill Plate", text: "COLONIAL Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "L Striker Plate", text: "L STRIKER PLATE" }
             ];
         }
@@ -1077,8 +1051,10 @@ function bindBottomFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "L Striker Plate", text: "L STRIKER PLATE" }
             ];
         } else if (frameType === "Large Bullnose Z Frame") {
@@ -1087,8 +1063,10 @@ function bindBottomFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Large Bullnose Z Sill Plate", text: "LARGE BULLNOSE Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "L Striker Plate", text: "L STRIKER PLATE" }
             ];
         } else if (frameType === "Colonial Z Frame") {
@@ -1097,8 +1075,10 @@ function bindBottomFrame(frameType) {
                 { value: "Yes", text: "YES" },
                 { value: "No", text: "NO" },
                 { value: "Light Block", text: "LIGHT BLOCK" },
-                { value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
-                { value: "Colonial Z Sill Plate", text: "COLONIAL Z SILL PLATE" },
+                //{ value: "9.5mm Sill Plate", text: "9.5MM SILL PLATE" },
+                { value: "Sill Plate (9.5mm)", text: "SILL PLATE (9.5MM)" },
+                //{ value: "Small Bullnose Z Sill Plate", text: "SMALL BULLNOSE Z SILL PLATE" },
+                { value: "Sill Plate (Bullnose Z)", text: "SILL PLATE (BULLNOSE Z)" },
                 { value: "L Striker Plate", text: "L STRIKER PLATE" }
             ];
         } else if (frameType === "No Frame") {
