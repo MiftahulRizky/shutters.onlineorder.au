@@ -3098,7 +3098,7 @@ Public Class OrderConfig
             Dim mountingDeduction As Decimal = 0
             Dim standardGap As Decimal = 2
 
-            If deductType = "Bottom" And frameTop = "Yes" Then
+            If deductType = "Bottom" And frameBottom = "Yes" Then
                 If frameType = "Beaded L 49mm" Then frameDeduction = 22
                 If frameType = "Insert L 49mm" Then frameDeduction = 22
                 If frameType = "Small Bullnose Z Frame" Then frameDeduction = 22
@@ -3126,6 +3126,80 @@ Public Class OrderConfig
                 End If
             End If
             result = drop - frameDeduction - mountingDeduction - standardGap
+        End If
+
+        If blindName = "Fixed" Then
+            Dim frameDeduction As Decimal = 0
+            Dim standardGap As Decimal = 2
+
+            If frameType = "U Channel" Then
+                If deductType = "Bottom" And frameBottom = "U Channel" Then
+                    frameDeduction = 17.5
+                End If
+                If deductType = "Top" And frameTop = "U Channel" Then
+                    frameDeduction = 17.5
+                End If
+            End If
+
+            If frameType = "19x19 Light Block" Then
+                frameDeduction = 1.5
+            End If
+
+            result = drop - frameDeduction - standardGap
+        End If
+
+        If blindName = "Track Bi-fold" Then
+            Dim frameDeduction As Decimal = 0
+            Dim mountDeduction As Decimal = 0
+            Dim standardGap As Decimal = 2
+
+            If deductType = "Bottom" Then
+                If frameBottom = "Yes" Then
+                    frameDeduction = 46
+                End If
+                If frameBottom = "No" Then
+                    frameDeduction = 24
+                End If
+            End If
+
+            If deductType = "Top" Then
+                If frameTop = "Yes" Then
+                    frameDeduction = 73
+                End If
+            End If
+
+            If mounting = "Inside" Then
+                If frameBottom = "No" Then mountDeduction = 1
+            End If
+
+            result = drop - frameDeduction - mountDeduction - standardGap
+        End If
+
+        If blindName = "Track Sliding" Or blindName = "Track Sliding Single Track" Then
+            Dim frameDeduction As Decimal = 0
+            Dim mountDeduction As Decimal = 0
+            Dim standardGap As Decimal = 2
+
+            If deductType = "Bottom" Then
+                If frameBottom = "Yes" Then
+                    frameDeduction = 45
+                End If
+                If frameBottom = "No" Then
+                    frameDeduction = 23
+                End If
+            End If
+
+            If deductType = "Top" Then
+                If frameTop = "Yes" Then
+                    frameDeduction = 73
+                End If
+            End If
+
+            If mounting = "Inside" Then
+                If frameBottom = "No" Then mountDeduction = 1
+            End If
+
+            result = drop - frameDeduction - mountDeduction - standardGap
         End If
 
         Return result
