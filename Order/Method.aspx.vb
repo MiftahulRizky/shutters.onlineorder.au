@@ -522,7 +522,7 @@ Partial Class Order_Method
 
             If blindName = "Panel Only" Then
                 If width < 250 Then Return "MINIMUM PANEL WIDTH IS 250MM !"
-                If width > 914 Then Return "MAXIMUM PANEL WIDTH IS 914mm !"
+                If width > 914 Then Return "MAXIMUM PANEL WIDTH IS 914MM !"
 
                 If drop < 250 Then Return "MINIMUM PANEL HEIGHT IS 250MM !"
                 If drop > 3000 Then Return "MAXIMUM PANEL HEIGHT IS 3000MM !"
@@ -541,7 +541,7 @@ Partial Class Order_Method
                 If panelWidth > 610 Then Return "MAXIMUM PANEL WIDTH IS 610MM !"
 
                 If panelHeight < 250 Then Return "MINIMUM PANEL HEIGHT IS 250MM !"
-                If panelHeight > 2500 And data.framebottom <> "No" Then Return "MAXIMUM PANEL HEIGHT IS 2500mm !"
+                If panelHeight > 2500 And data.framebottom <> "No" Then Return "MAXIMUM PANEL HEIGHT IS 2500MM !"
                 If panelHeight > 3000 Then Return "MAXIMUM PANEL HEIGHT IS 3000MM !"
             End If
 
