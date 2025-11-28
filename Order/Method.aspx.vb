@@ -457,9 +457,9 @@ Partial Class Order_Method
             If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | SECOND SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
         End If
 
-        If data.frametype = "Insert L 49mm" And (blindName = "Hinged" Or blindName = "Hinged Bi-fold") Then
-            If String.IsNullOrEmpty(data.buildout) Then Return "BUILDOUT IS REQUIRED !"
-        End If
+        ' If data.frametype = "Insert L 49mm" And (blindName = "Hinged" Or blindName = "Hinged Bi-fold") Then
+        '     If String.IsNullOrEmpty(data.buildout) Then Return "BUILDOUT IS REQUIRED !"
+        ' End If
 
         If blindName = "Track Bi-fold" Or blindName = "Track Sliding" Or blindName = "Track Sliding Single Track" Then
             If data.framebottom = "No" And data.bottomtracktype = "" Then

@@ -3156,7 +3156,7 @@ Public Class OrderConfig
                 If frameBottom = "Yes" Then
                     frameDeduction = 46
                 End If
-                If frameBottom = "No" Then
+                If frameBottom = "Yes" Then
                     frameDeduction = 24
                 End If
             End If
