@@ -3134,7 +3134,7 @@ Public Class OrderConfig
 
             If frameType = "U Channel" Then
                 If deductType = "Bottom" And frameBottom = "U Channel" Then
-                    frameDeduction = 17.5
+                    frameDeduction = 9.5
                 End If
                 If deductType = "Top" And frameTop = "U Channel" Then
                     frameDeduction = 17.5
