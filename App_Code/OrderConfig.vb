@@ -3130,7 +3130,6 @@ Public Class OrderConfig
 
         If blindName = "Fixed" Then
             Dim frameDeduction As Decimal = 0
-            Dim standardGap As Decimal = 2
 
             If frameType = "U Channel" Then
                 If deductType = "Bottom" And frameBottom = "U Channel" Then
@@ -3145,7 +3144,7 @@ Public Class OrderConfig
                 frameDeduction = 1
             End If
 
-            result = drop - frameDeduction - standardGap
+            result = drop - frameDeduction
         End If
 
         If blindName = "Track Bi-fold" Then
