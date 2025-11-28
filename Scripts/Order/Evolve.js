@@ -737,9 +737,9 @@ function bindLeftFrame(frameType) {
                 { value: "No", text: "NO" }
             ];
         } else if (frameType === "U Channel") {
-            options = [
-                { value: "No", text: "NO" }
-            ];
+            options = [{ value: "No", text: "NO" }];
+        } else if(frameType === "19x19 Light Block"){
+            options = [{ value: "No", text: "NO" }];
         }
         options.forEach(opt => {
             let optionElement = document.createElement("option");
@@ -789,9 +789,9 @@ function bindRightFrame(frameType) {
                 { value: "No", text: "NO" }
             ];
         } else if (frameType === "U Channel") {
-            options = [
-                { value: "No", text: "NO" }
-            ];
+            options = [{ value: "No", text: "NO" }];
+        } else if(frameType === "19x19 Light Block"){
+            options = [{ value: "No", text: "NO" }];
         }
         options.forEach(opt => {
             let optionElement = document.createElement("option");
@@ -850,6 +850,8 @@ function bindTopFrame(frameType, mounting) {
                 { value: "No", text: "NO" },
                 { value: "U Channel", text: "U CHANNEL" }
             ];
+        } else if(frameType === "19x19 Light Block"){
+            options = [{ value: "No", text: "NO" }];
         }
         options.forEach(opt => {
             let optionElement = document.createElement("option");
@@ -906,6 +908,8 @@ function bindBottomFrame(frameType) {
                 { value: "No", text: "NO" },
                 { value: "U Channel", text: "U CHANNEL" }
             ];
+        } else if(frameType === "19x19 Light Block"){
+            options = [{ value: "No", text: "NO" }];
         }
         options.forEach(opt => {
             let optionElement = document.createElement("option");
