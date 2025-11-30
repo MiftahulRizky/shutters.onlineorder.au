@@ -3094,8 +3094,7 @@ Public Class OrderConfig
         Dim deductType As String = Convert.ToString(data(6))
 
         If blindName = "Panel Only" Then
-            If deductType = "Bottom" Then
-            End If
+            result = drop
         End If
 
         If blindName = "Hinged" Or blindName = "Hinged Bi-fold" Then
