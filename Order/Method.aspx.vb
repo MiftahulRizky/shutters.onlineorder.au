@@ -423,7 +423,7 @@ Partial Class Order_Method
             Dim dataGap As Object() = {blindName, section1, data.mounting, data.frametype, data.frametop, data.framebottom, "Bottom"}
 
             Dim heightDeduct As Decimal = orderCfg.HeightDeductEvolve(dataGap)
-            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MINIMUM PANEL HEIGHT IS 250MM !"
+            If heightDeduct < 250 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MINIMUM PANEL HEIGHT IS 250MM !" & heightDeduct
             If heightDeduct > 1500 Then Return "[MIDRAIL HEIGHT | FIRST SECTION] MAXIMUM PANEL HEIGHT IS 1500MM !"
 
             dataGap = {blindName, section2, data.mounting, data.frametype, data.frametop, data.framebottom, "Top"}

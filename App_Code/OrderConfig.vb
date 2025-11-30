@@ -3093,6 +3093,11 @@ Public Class OrderConfig
         Dim frameBottom As String = Convert.ToString(data(5))
         Dim deductType As String = Convert.ToString(data(6))
 
+        If blindName = "Panel Only" Then
+            If deductType = "Bottom" Then
+            End If
+        End If
+
         If blindName = "Hinged" Or blindName = "Hinged Bi-fold" Then
             Dim frameDeduction As Decimal = 0
             Dim mountingDeduction As Decimal = 0
