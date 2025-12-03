@@ -3154,11 +3154,12 @@ Public Class OrderConfig
         If blindName = "Track Bi-fold" Then
             Dim frameDeduction As Decimal = 0
             Dim mountDeduction As Decimal = 0
-            Dim sideBoardDeduction As Decimal = 0
+            Dim bottomDeduction As Decimal = 0
 
             If deductType = "Bottom" Then
                 If frameBottom = "Yes" Then
                     frameDeduction = 46
+                    bottomDeduction = 22
                 End If
                 If frameBottom = "No" Then
                     frameDeduction = 24
@@ -3168,25 +3169,28 @@ Public Class OrderConfig
             If deductType = "Top" Then
                 If frameTop = "Yes" Then
                     frameDeduction = 73
-                    sideBoardDeduction = 22
+                End If
+                If frameBottom = "Yes" Then
+                    bottomDeduction = 22
                 End If
             End If
 
             If mounting = "Inside" Then
-                If frameBottom = "No" Then mountDeduction = 1
+                mountDeduction = 1
             End If
 
-            result = drop - frameDeduction - mountDeduction - sideBoardDeduction
+            result = drop - frameDeduction - mountDeduction - bottomDeduction
         End If
 
         If blindName = "Track Sliding" Or blindName = "Track Sliding Single Track" Then
             Dim frameDeduction As Decimal = 0
             Dim mountDeduction As Decimal = 0
-            Dim standardGap As Decimal = 2
+            Dim bottomDeduction As Decimal = 2
 
             If deductType = "Bottom" Then
                 If frameBottom = "Yes" Then
                     frameDeduction = 45
+                    bottomDeduction = 22
                 End If
                 If frameBottom = "No" Then
                     frameDeduction = 23
@@ -3197,13 +3201,16 @@ Public Class OrderConfig
                 If frameTop = "Yes" Then
                     frameDeduction = 73
                 End If
+                If frameBottom = "Yes" Then
+                    bottomDeduction = 22
+                End If
             End If
 
             If mounting = "Inside" Then
-                If frameBottom = "No" Then mountDeduction = 1
+                mountDeduction = 1
             End If
 
-            result = drop - frameDeduction - mountDeduction - standardGap
+            result = drop - frameDeduction - mountDeduction - bottomDeduction
         End If
 
         Return result
