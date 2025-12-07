@@ -3170,9 +3170,6 @@ Public Class OrderConfig
                 If frameTop = "Yes" Then
                     frameDeduction = 73
                 End If
-                If frameBottom = "Yes" Then
-                    bottomDeduction = 22
-                End If
             End If
 
             If mounting = "Inside" Then
