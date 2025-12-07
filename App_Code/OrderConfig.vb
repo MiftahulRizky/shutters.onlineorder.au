@@ -3159,7 +3159,6 @@ Public Class OrderConfig
             If deductType = "Bottom" Then
                 If frameBottom = "Yes" Then
                     frameDeduction = 46
-                    bottomDeduction = 22
                 End If
                 If frameBottom = "No" Then
                     frameDeduction = 24
@@ -3187,7 +3186,6 @@ Public Class OrderConfig
             If deductType = "Bottom" Then
                 If frameBottom = "Yes" Then
                     frameDeduction = 45
-                    bottomDeduction = 22
                 End If
                 If frameBottom = "No" Then
                     frameDeduction = 23
@@ -3197,9 +3195,6 @@ Public Class OrderConfig
             If deductType = "Top" Then
                 If frameTop = "Yes" Then
                     frameDeduction = 73
-                End If
-                If frameBottom = "Yes" Then
-                    bottomDeduction = 22
                 End If
             End If
 
