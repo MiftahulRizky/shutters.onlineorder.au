@@ -3169,12 +3169,12 @@ Public Class OrderConfig
                 If frameTop = "Yes" Then
                     frameDeduction = 73
                 End If
-            End If
 
-            If mounting = "Inside" Then
-                mountDeduction = 1
+                If mounting = "Inside" Then
+                    mountDeduction = 1
+                End If
             End If
-
+            
             result = drop - frameDeduction - mountDeduction - bottomDeduction
         End If
 
@@ -3196,12 +3196,12 @@ Public Class OrderConfig
                 If frameTop = "Yes" Then
                     frameDeduction = 73
                 End If
-            End If
 
-            If mounting = "Inside" Then
-                mountDeduction = 1
+                If mounting = "Inside" Then
+                    mountDeduction = 1
+                End If
             End If
-
+            
             result = drop - frameDeduction - mountDeduction - bottomDeduction
         End If
 
