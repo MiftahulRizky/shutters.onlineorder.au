@@ -3181,7 +3181,7 @@ Public Class OrderConfig
         If blindName = "Track Sliding" Or blindName = "Track Sliding Single Track" Then
             Dim frameDeduction As Decimal = 0
             Dim mountDeduction As Decimal = 0
-            Dim bottomDeduction As Decimal = 2
+            Dim bottomDeduction As Decimal = 0
 
             If deductType = "Bottom" Then
                 If frameBottom = "Yes" Then
