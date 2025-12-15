@@ -12,43 +12,78 @@ Partial Class Order_API_Evolve
         Response.Cache.SetCacheability(HttpCacheability.NoCache)
         Response.Cache.SetNoStore()
 
-        Dim id As String = Request.QueryString("id")
-        If String.IsNullOrEmpty(id) Then
-            WriteJson(New With {.status = "error", .message = "Parameter 'id' is required"})
+        Dim headerId As String = Request.QueryString("id")
+        If String.IsNullOrEmpty(headerId) Then
+            WriteJson(New With {.error = "id is required"})
             Return
         End If
 
-        Dim dt As New DataTable()
-
         Try
-            Using con As New SqlConnection(myConn)
-                Using cmd As New SqlCommand("SELECT TOP 1 * FROM OrderHeaders WHERE Id=@Id", con)
-                    cmd.Parameters.AddWithValue("@Id", id)
-                    con.Open()
+            Dim result As New Dictionary(Of String, Object)
 
-                    Dim da As New SqlDataAdapter(cmd)
-                    da.Fill(dt)
-                End Using
-            End Using
-
-            If dt.Rows.Count = 0 Then
-                WriteJson(New With {.status = "not_found", .id = id})
-            Else
-                Dim row = dt.Rows(0)
-                Dim result = New Dictionary(Of String, Object)
-
-                For Each col As DataColumn In dt.Columns
-                    result(col.ColumnName) = row(col)
-                Next
-
-                WriteJson(result)
+            Dim header As Dictionary(Of String, Object) = GetHeader(headerId)
+            If header Is Nothing Then
+                WriteJson(New With {.error = "Header not found"})
+                Return
             End If
 
-        Catch ex As Exception
-            WriteJson(New With {.status = "error", .message = ex.Message})
-        End Try
+            result("header") = header
 
+            ' ================= ITEMS =================
+            Dim items As List(Of Dictionary(Of String, Object)) = GetItems(headerId)
+            result("items") = items
+
+            WriteJson(result)
     End Sub
+
+    Private Function GetHeader(headerId As String) As Dictionary(Of String, Object)
+        Using con As New SqlConnection(myConn)
+            Using cmd As New SqlCommand("SELECT OrderId, OrderNumber, OrderName, OrderNote FROM OrderHeaders WHERE HeaderId =@HeaderId", con)
+                cmd.Parameters.AddWithValue("@HeaderId", headerId)
+                con.Open()
+
+                Using dr As SqlDataReader = cmd.ExecuteReader()
+                    If dr.Read() Then
+                        Dim header As New Dictionary(Of String, Object)
+                        header("OrderId") = dr("OrderId")
+                        header("OrderNumber") = dr("OrderNumber")
+                        header("OrderName") = dr("OrderName")
+                        header("OrderNote") = dr("OrderNote")
+                        Return header
+                    End If
+                End Using
+            End Using
+        End Using
+
+        Return Nothing
+    End Function
+
+    ' ====== GET ITEMS ======
+    Private Function GetItems(headerId As String) As List(Of Dictionary(Of String, Object))
+        Dim items As New List(Of Dictionary(Of String, Object))
+
+        Using con As New SqlConnection(myConn)
+            Using cmd As New SqlCommand("SELECT Room, Mounting, Width, [Drop] FROM OrderDetails WHERE HeaderId=@HeaderId AND Active=1", con)
+
+                cmd.Parameters.AddWithValue("@HeaderId", headerId)
+                con.Open()
+
+                Using dr As SqlDataReader = cmd.ExecuteReader()
+                    While dr.Read()
+                        Dim item As New Dictionary(Of String, Object)
+                        item("Room") = dr("Room")
+                        item("Mounting") = dr("Mounting")
+                        item("Width") = dr("Width")
+                        item("Height") = dr("Drop")
+                        item("Qty") = dr("Qty")
+                        items.Add(item)
+                    End While
+                End Using
+            End Using
+        End Using
+
+        Return items
+    End Function
 
     Private Sub WriteJson(obj As Object)
         Dim serializer As New JavaScriptSerializer()
