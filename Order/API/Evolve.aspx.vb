@@ -29,7 +29,6 @@ Partial Class Order_API_Evolve
 
             result("header") = header
 
-            ' ================= ITEMS =================
             Dim items As List(Of Dictionary(Of String, Object)) = GetItems(headerId)
             result("items") = items
 
@@ -41,7 +40,7 @@ Partial Class Order_API_Evolve
 
     Private Function GetHeader(headerId As String) As Dictionary(Of String, Object)
         Using con As New SqlConnection(myConn)
-            Using cmd As New SqlCommand("SELECT OrderId, OrderNumber, OrderName, OrderNote FROM OrderHeaders WHERE HeaderId =@HeaderId", con)
+            Using cmd As New SqlCommand("SELECT OrderId, OrderNumber, OrderName, OrderNote FROM OrderHeaders WHERE Id=@HeaderId", con)
                 cmd.Parameters.AddWithValue("@HeaderId", headerId)
                 con.Open()
 
@@ -61,7 +60,6 @@ Partial Class Order_API_Evolve
         Return Nothing
     End Function
 
-    ' ====== GET ITEMS ======
     Private Function GetItems(headerId As String) As List(Of Dictionary(Of String, Object))
         Dim items As New List(Of Dictionary(Of String, Object))
 
