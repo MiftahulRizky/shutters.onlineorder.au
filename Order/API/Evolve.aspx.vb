@@ -64,7 +64,7 @@ Partial Class Order_API_Evolve
         Dim items As New List(Of Dictionary(Of String, Object))
 
         Using con As New SqlConnection(myConn)
-            Using cmd As New SqlCommand("SELECT Room, Mounting, Width, [Drop] FROM OrderDetails WHERE HeaderId=@HeaderId AND Active=1", con)
+            Using cmd As New SqlCommand("SELECT Qty, Room, Mounting, Width, [Drop] FROM OrderDetails WHERE HeaderId=@HeaderId AND Active=1", con)
 
                 cmd.Parameters.AddWithValue("@HeaderId", headerId)
                 con.Open()
