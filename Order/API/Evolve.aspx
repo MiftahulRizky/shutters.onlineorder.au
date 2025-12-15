@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Evolve.aspx.vb" Inherits="Order_API_Evolve" %>
-<%@ OutputCache Duration="0" Location="None" NoStore="true" %>
 
 <!DOCTYPE html>
 

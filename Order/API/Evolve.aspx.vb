@@ -8,6 +8,8 @@ Partial Class Order_API_Evolve
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         Response.ContentType = "application/json"
+        Response.Cache.SetCacheability(HttpCacheability.NoCache)
+        Response.Cache.SetNoStore()
 
         Dim id As String = Request.QueryString("id")
         If String.IsNullOrEmpty(id) Then
