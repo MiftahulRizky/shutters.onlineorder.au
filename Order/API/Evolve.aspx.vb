@@ -34,6 +34,9 @@ Partial Class Order_API_Evolve
             result("items") = items
 
             WriteJson(result)
+        Catch ex As Exception
+            WriteJson(New With {.error = ex.Message})
+        End Try
     End Sub
 
     Private Function GetHeader(headerId As String) As Dictionary(Of String, Object)
