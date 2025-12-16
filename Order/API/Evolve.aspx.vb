@@ -89,7 +89,11 @@ Partial Class Order_API_Evolve
     Private Sub WriteJson(obj As Object)
         Dim serializer As New JavaScriptSerializer()
         Dim json As String = serializer.Serialize(obj)
+
+        Response.Clear()
+        Response.ContentType = "application/json"
         Response.Write(json)
-        Response.End()
+
+        HttpContext.Current.ApplicationInstance.CompleteRequest()
     End Sub
 End Class
