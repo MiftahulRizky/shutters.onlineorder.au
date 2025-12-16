@@ -45,18 +45,19 @@ Public Class Evolve
 
     Private Function GetHeader(headerId As String) As Dictionary(Of String, Object)
         Using con As New SqlConnection(myConn)
-            Using cmd As New SqlCommand("SELECT OrderId, OrderNumber, OrderName, OrderNote FROM OrderHeaders WHERE Id=@HeaderId", con)
-
+            Using cmd As New SqlCommand("SELECT Customers.Name AS CustomerName, OrderHeaders.OrderId AS OrderId, OrderHeaders.OrderNumber AS OrderNumber, OrderHeaders.OrderName AS OrderName, OrderHeaders.OrderNote AS OrderNote, OrderHeaders.JobDate AS JobDate FROM OrderHeaders LEFT JOIN Customers ON OrderHeaders.CustomerId=Customers.Id WHERE OrderHeaders.Id=@HeaderId AND OrderHeaders.Status='In Production' AND OrderHeaders.OrderType='Evolve'", con)
                 cmd.Parameters.AddWithValue("@HeaderId", headerId)
                 con.Open()
 
                 Using dr = cmd.ExecuteReader()
                     If dr.Read() Then
                         Return New Dictionary(Of String, Object) From {
+                            {"CustomerName", dr("CustomerName")},
                             {"OrderId", dr("OrderId")},
                             {"OrderNumber", dr("OrderNumber")},
                             {"OrderName", dr("OrderName")},
-                            {"OrderNote", dr("OrderNote")}
+                            {"OrderNote", dr("OrderNote")},
+                            {"OrderDate", dr("JobDate")}
                         }
                     End If
                 End Using
@@ -70,18 +71,57 @@ Public Class Evolve
         Dim items As New List(Of Dictionary(Of String, Object))
 
         Using con As New SqlConnection(myConn)
-            Using cmd As New SqlCommand("SELECT Qty, Room, Mounting, Width, [Drop] FROM OrderDetails WHERE HeaderId=@HeaderId AND Active=1", con)
+            Using cmd As New SqlCommand("SELECT OrderDetails.Qty, OrderDetails.Room, OrderDetails.Mounting, OrderDetails.Width, OrderDetails.[Drop], Blinds.Name AS BlindName, Products.ColourType AS ProductColour, OrderDetails.SemiInsideMount, OrderDetails.LouvreSize, OrderDetails.LouvrePosition, OrderDetails.HingeColour, OrderDetails.MidrailHeight1, OrderDetails.MidrailHeight2, OrderDetails.MidrailCritical, OrderDetails.Layout, OrderDetails.LayoutSpecial, OrderDetails.CustomHeaderLength, OrderDetails.FrameType, OrderDetails.FrameLeft, OrderDetails.FrameRight, OrderDetails.FrameTop, OrderDetails.FrameBottom, OrderDetails.BottomTrackType, OrderDetails.Buildout, OrderDetails.LocationTPost1, OrderDetails.LocationTPost2, OrderDetails.LocationTPost3, OrderDetails.LocationTPost4, OrderDetails.LocationTPost5, OrderDetails.HorizontalTPost, OrderDetails.HorizontalTPostHeight, OrderDetails.JoinedPanels, OrderDetails.ReverseHinged, OrderDetails.PelmetFlat, OrderDetails.ExtraFascia, OrderDetails.HingesLoose, OrderDetails.TiltrodType, OrderDetails.TiltrodSplit, OrderDetails.SplitHeight1, OrderDetails.SplitHeight2, OrderDetails.Notes FROM OrderDetails LEFT JOIN Products ON OrderDetails.ProductId=Products.Id LEFT JOIN Designs ON Products.DesignId=Designs.Id LEFT JOIN Blinds ON Products.BlindId=Blinds.Id WHERE OrderDetails.HeaderId=@HeaderId AND OrderDetails.Active=1 AND Designs.Type='Evolve'", con)
                 cmd.Parameters.AddWithValue("@HeaderId", headerId)
                 con.Open()
 
                 Using dr = cmd.ExecuteReader()
                     While dr.Read()
                         items.Add(New Dictionary(Of String, Object) From {
+                            Dim thisLayout As String = dr("Layout").ToString()
+                            If dr("Layout") = "Other" Then
+                                thisLayout = dr("LayoutSpecial").ToString()
+                            End If
+                            {"Qty", dr("Qty")},
                             {"Room", dr("Room")},
                             {"Mounting", dr("Mounting")},
+                            {"SemiInsideMount", dr("SemiInsideMount")},
                             {"Width", dr("Width")},
-                            {"Height", dr("Drop")},
-                            {"Qty", dr("Qty")}
+                            {"Drop", dr("Drop")},
+                            {"EvolveType", dr("BlindName")},
+                            {"EvolveColour", dr("ProductColour")},
+                            {"LouvreSize", dr("LouvreSize")},
+                            {"LouvrePosition", dr("LouvrePosition")},
+                            {"HingeColour", dr("HingeColour")},
+                            {"MidrailHeight1", dr("MidrailHeight1")},
+                            {"MidrailHeight2", dr("MidrailHeight2")},
+                            {"MidrailCritical", dr("MidrailCritical")},
+                            {"Layout", thisLayout},
+                            {"CustomHeaderLength", dr("CustomHeaderLength")},
+                            {"FrameType", dr("FrameType")},
+                            {"FrameLeft", dr("FrameLeft")},
+                            {"FrameRight", dr("FrameRight")},
+                            {"FrameTop", dr("FrameTop")},
+                            {"FrameBottom", dr("FrameBottom")},
+                            {"BottomTrackType", dr("BottomTrackType")},
+                            {"Buildout", dr("Buildout")},
+                            {"GAP1", dr("LocationTPost1")},
+                            {"GAP2", dr("LocationTPost2")},
+                            {"GAP3", dr("LocationTPost3")},
+                            {"GAP4", dr("LocationTPost4")},
+                            {"GAP5", dr("LocationTPost5")},
+                            {"HorizontalTPost", dr("HorizontalTPost")},
+                            {"HorizontalTPostHeight", dr("HorizontalTPostHeight")},
+                            {"JoinedPanels", dr("JoinedPanels")},
+                            {"ReverseHinged", dr("ReverseHinged")},
+                            {"PelmetFlat", dr("PelmetFlat")},
+                            {"ExtraFascia", dr("ExtraFascia")},
+                            {"HingesLoose", dr("HingesLoose")},
+                            {"TiltrodType", dr("TiltrodType")},
+                            {"TiltrodSplit", dr("TiltrodSplit")},
+                            {"SplitHeight1", dr("SplitHeight1")},
+                            {"SplitHeight2", dr("SplitHeight2")},
+                            {"Notes", dr("Notes")}
                         })
                     End While
                 End Using
