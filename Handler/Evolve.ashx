@@ -57,7 +57,7 @@ Public Class Evolve
                             {"OrderNumber", dr("OrderNumber")},
                             {"OrderName", dr("OrderName")},
                             {"OrderNote", dr("OrderNote")},
-                            {"OrderDate", dr("JobDate")}
+                            {"OrderDate", Convert.ToDateTime(dr("JobDate")).ToString("dd-MMM-yyyy")}
                         }
                     End If
                 End Using
@@ -84,7 +84,7 @@ Public Class Evolve
                     
                         items.Add(New Dictionary(Of String, Object) From {
                             {"Qty", dr("Qty")},
-                            {"Room", dr("Room")},
+                            {"Location", dr("Room")},
                             {"Mounting", dr("Mounting")},
                             {"SemiInsideMount", dr("SemiInsideMount")},
                             {"Width", dr("Width")},
