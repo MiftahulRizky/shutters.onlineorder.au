@@ -52,10 +52,7 @@ Public Class Evolve
                 Using dr = cmd.ExecuteReader()
                     If dr.Read() Then
                         Return New Dictionary(Of String, Object) From {
-                            {"CustomerName", dr("CustomerName")},
                             {"OrderId", dr("OrderId")},
-                            {"OrderNumber", dr("OrderNumber")},
-                            {"OrderName", dr("OrderName")},
                             {"OrderNote", dr("OrderNote")},
                             {"OrderDate", Convert.ToDateTime(dr("JobDate")).ToString("dd-MMM-yyyy")}
                         }
