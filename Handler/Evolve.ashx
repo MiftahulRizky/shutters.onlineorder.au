@@ -77,11 +77,12 @@ Public Class Evolve
 
                 Using dr = cmd.ExecuteReader()
                     While dr.Read()
+                        Dim thisLayout As String = dr("Layout").ToString()
+                        If dr("Layout") = "Other" Then
+                            thisLayout = dr("LayoutSpecial").ToString()
+                        End If
+                    
                         items.Add(New Dictionary(Of String, Object) From {
-                            Dim thisLayout As String = dr("Layout").ToString()
-                            If dr("Layout") = "Other" Then
-                                thisLayout = dr("LayoutSpecial").ToString()
-                            End If
                             {"Qty", dr("Qty")},
                             {"Room", dr("Room")},
                             {"Mounting", dr("Mounting")},
