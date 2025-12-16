@@ -45,9 +45,7 @@ Public Class Evolve
 
     Private Function GetHeader(headerId As String) As Dictionary(Of String, Object)
         Using con As New SqlConnection(myConn)
-            Using cmd As New SqlCommand(
-                "SELECT OrderId, OrderNumber, OrderName, OrderNote 
-                 FROM OrderHeaders WHERE Id=@HeaderId", con)
+            Using cmd As New SqlCommand("SELECT OrderId, OrderNumber, OrderName, OrderNote FROM OrderHeaders WHERE Id=@HeaderId", con)
 
                 cmd.Parameters.AddWithValue("@HeaderId", headerId)
                 con.Open()
@@ -72,11 +70,7 @@ Public Class Evolve
         Dim items As New List(Of Dictionary(Of String, Object))
 
         Using con As New SqlConnection(myConn)
-            Using cmd As New SqlCommand(
-                "SELECT Qty, Room, Mounting, Width, [Drop]
-                 FROM OrderDetails 
-                 WHERE HeaderId=@HeaderId AND Active=1", con)
-
+            Using cmd As New SqlCommand("SELECT Qty, Room, Mounting, Width, [Drop] FROM OrderDetails WHERE HeaderId=@HeaderId AND Active=1", con)
                 cmd.Parameters.AddWithValue("@HeaderId", headerId)
                 con.Open()
 
