@@ -54,7 +54,7 @@ Public Class Evolve
                         Return New Dictionary(Of String, Object) From {
                             {"OrderId", dr("OrderId")},
                             {"OrderNote", dr("OrderNote")},
-                            {"OrderDate", Convert.ToDateTime(dr("JobDate")).ToString("dd-MMM-yyyy")}
+                            {"OrderDate", Convert.ToDateTime(dr("JobDate")).ToString("yyyy-MM-dd")}
                         }
                     End If
                 End Using
