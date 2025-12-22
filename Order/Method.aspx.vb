@@ -652,7 +652,9 @@ Partial Class Order_Method
             If Not Integer.TryParse(data.markup, markup) OrElse markup < 0 Then Return "PLEASE CHECK YOUR MARK UP ORDER !"
         End If
 
-        Dim productpriceGroupName As String = orderCfg.GetItemData("SELECT Name FROM Designs WHERE Id = '" + data.designid + "'")
+        Dim customerPriceGroup As String = orderCfg.GetItemData("SELECT Customers.Pricing FROM Customers INNER JOIN OrderHeaders ON Customers.Id = OrderHeaders.CustomerId WHERE OrderHeaders.Id='" + data.headerid + "'")
+
+        Dim productpriceGroupName As String = String.Format("Evolve {0}", customerPriceGroup)
         Dim productpriceGroupId As String = orderCfg.GetProductPriceGroupId(data.designid, productpriceGroupName)
 
         If blindName = "Panel Only" Then
