@@ -226,7 +226,7 @@ Partial Class Setting_Price_Matrix
     Private Sub BindPriceGroup()
         ddlPriceGroup.Items.Clear()
         Try
-            ddlPriceGroup.DataSource = settingCfg.GetListData("SELECT PriceProductGroups.Id AS Id, Designs.Name + ' | ' + PriceProductGroups.Name AS GroupName FROM PriceProductGroups INNER JOIN Designs ON PriceProductGroups.DesignId = Designs.Id WHERE Designs.Active = 1 AND PriceProductGroups.Active = 1 ORDER BY Designs.Name, PriceProductGroups.Name ASC")
+            ddlPriceGroup.DataSource = settingCfg.GetListData("SELECT PriceProductGroups.Id AS Id, Designs.Name + ' | ' + PriceProductGroups.Name AS GroupName FROM PriceProductGroups INNER JOIN Designs ON PriceProductGroups.DesignId = Designs.Id WHERE PriceProductGroups.Active = 1 ORDER BY Designs.Name, PriceProductGroups.Name ASC")
             ddlPriceGroup.DataTextField = "GroupName"
             ddlPriceGroup.DataValueField = "Id"
             ddlPriceGroup.DataBind()
