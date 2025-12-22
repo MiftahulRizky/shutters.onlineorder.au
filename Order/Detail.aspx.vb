@@ -2464,9 +2464,7 @@ Partial Class Order_Detail
                 result = itemDescription & " - " & width & "mm"
             End If
         End If
-
-
-
+        
         If designName = "Evolve Parts" Then
             result = String.Format("{0}", itemDescription)
 

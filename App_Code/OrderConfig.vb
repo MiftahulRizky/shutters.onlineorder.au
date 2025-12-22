@@ -1228,7 +1228,7 @@ Public Class OrderConfig
                 If designName = "Vertical" And blindName = "Blades Only" Then widthExecute = qtyBlade
                 If designName = "Additional" Then widthExecute = 0 : dropExecute = 0
                 If designName = "Curtain" Then dropExecute = 0
-                If designName = "Evolve Parts" Or designName = "Evolve Parts" Or designName = "Evolve Shutters" Or designName = "Panorama PVC Shutters" Or designName = "Panorama PVC Parts" Then widthExecute = 0 : dropExecute = 0
+                If designName = "Evolve Parts" Or designName = "Evolve Shutters" Or designName = "Panorama PVC Shutters" Or designName = "Panorama PVC Parts" Then widthExecute = 0 : dropExecute = 0
 
                 Dim descriptionPrice As String = String.Empty
 
@@ -1502,6 +1502,10 @@ Public Class OrderConfig
                     End If
 
                     If designName = "Panorama PVC Parts" Then
+                        thisCost = thisGridMatrix + thisSurcharge
+                    End If
+
+                    If designName = "Evolve Shutters" Then
                         thisCost = thisGridMatrix + thisSurcharge
                     End If
 
