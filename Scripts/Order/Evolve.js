@@ -1417,8 +1417,6 @@ function bindItemOrder(itemId) {
                     Mounting: mounting,
                     MidrailHeight1: height1,
                     MidrailHeight2: height2,
-                    LouvreSize: louvreSize,
-                    LouvrePosition: louvrePosition,
                     Buildout: buildout,
                     FrameType: frameType,
                     FrameBottom: bottomFrame,
@@ -1442,10 +1440,10 @@ function bindItemOrder(itemId) {
                     .then(() =>
                         bindFrameType(blindtype, mounting)
                     )
-                    .then(() => bindLeftFrame(frameType, mounting))
-                    .then(() => bindRightFrame(frameType, mounting))
+                    .then(() => bindLeftFrame(frameType))
+                    .then(() => bindRightFrame(frameType))
                     .then(() => bindTopFrame(frameType, mounting))
-                    .then(() => bindBottomFrame(frameType, mounting))
+                    .then(() => bindBottomFrame(frameType))
                     .then(() => bindBottomTrack(blindtype, bottomFrame))
                     .then(() => bindTiltrodSplit(height1))
                     .then(() => setFormValues(itemData))
