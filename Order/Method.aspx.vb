@@ -1586,9 +1586,10 @@ Partial Class Order_Method
             If blindName = "Hinged Bi-fold" Then
                 If panelWidth < 200 Then Return "MINIMUM PANEL WIDTH IS 200mm !"
                 If panelWidth > 900 Then Return "MAXIMUM PANEL WIDTH IS 900mm !"
-                If panelHeight < 282 And data.louvresize = "63" Then Return "MINIMUM PANEL HEIGHT IS 282mm !"
-                If panelHeight < 333 And data.louvresize = "89" Then Return "MINIMUM PANEL HEIGHT IS 333mm !"
-                If panelHeight < 384 And data.louvresize = "114" Then Return "MINIMUM PANEL HEIGHT IS 384mm !"
+
+                ' If panelHeight < 282 And data.louvresize = "63" Then Return "MINIMUM PANEL HEIGHT IS 282mm !"
+                ' If panelHeight < 333 And data.louvresize = "89" Then Return "MINIMUM PANEL HEIGHT IS 333mm !"
+                ' If panelHeight < 384 And data.louvresize = "114" Then Return "MINIMUM PANEL HEIGHT IS 384mm !"
 
                 If panelHeight > 1900 And (data.framebottom = "No") Then Return "MAXIMUM PANEL HEIGHT IS 1900mm !"
 
