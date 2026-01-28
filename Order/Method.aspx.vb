@@ -1785,10 +1785,11 @@ Partial Class Order_Method
                 data.buildoutposition = String.Empty
             End If
 
-            If layoutCode.Contains("T") AndAlso layoutCode.Contains("B") AndAlso layoutCode.Contains("C") AndAlso layoutCode.Contains("G") Then
+            If layoutCode.Contains("T") OrElse layoutCode.Contains("B") OrElse layoutCode.Contains("C") OrElse layoutCode.Contains("G") Then
                 data.samesizepanel = String.Empty
                 gap1 = 0 : gap2 = 0 : gap3 = 0 : gap4 = 0 : gap5 = 0
             End If
+
 
             If data.samesizepanel = "Yes" Then
                 gap1 = 0 : gap2 = 0 : gap3 = 0 : gap4 = 0 : gap5 = 0
