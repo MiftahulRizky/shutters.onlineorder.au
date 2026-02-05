@@ -6,6 +6,9 @@ Partial Class Account_Login
     Dim settingCfg As New SettingConfig
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        'Response.Redirect("https://onlineorder.au/account/login")
+        'Exit Sub
+
         Session.Clear()
         If Not IsPostBack Then
             MessageError(False, String.Empty)
