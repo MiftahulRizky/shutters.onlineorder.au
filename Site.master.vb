@@ -14,16 +14,16 @@ Public Partial Class SiteMaster
     End Sub
 
     Protected Sub master_Page_PreLoad(sender As Object, e As EventArgs)
-        'Response.Redirect("https://onlineorder.au/account/login")
-        'Exit Sub
+        Response.Redirect("https://onlineorder.au/account/login")
+        Exit Sub
         CheckSessions(Session("IsLoggedIn"))
         MyLoad()
         BindListNavigation()
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-        'Response.Redirect("https://onlineorder.au/account/login")
-        'Exit Sub
+        Response.Redirect("https://onlineorder.au/account/login")
+        Exit Sub
         CheckSessions(Session("IsLoggedIn"))
         BindActiveNavigasi()
     End Sub
